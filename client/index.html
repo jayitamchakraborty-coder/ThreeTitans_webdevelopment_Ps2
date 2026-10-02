@@ -18,48 +18,46 @@
             theme: {
                 extend: {
                     colors: {
-                        /* ── Override slate to NEUTRAL (zero blue) ── */
-                        slate: {
-                            50:  '#fafafa',
-                            100: '#f5f5f5',
-                            200: '#e5e5e5',
-                            300: '#d4d4d4',
-                            400: '#a3a3a3',
-                            500: '#737373',
-                            600: '#525252',
-                            700: '#404040',
-                            800: '#171717',
-                            900: '#0a0a0a',
-                            950: '#030303'
-                        },
-                        /* ── App tokens ── */
-                        "primary":       "#6366f1",
+                        "primary": "#6366f1",
                         "primary-hover": "#4f46e5",
                         "primary-light": "#e0e7ff",
-                        "on-primary":    "#ffffff",
-                        "surface":       "#fafafa",
-                        "surface-card":  "#ffffff",
-                        "border-subtle": "#e5e5e5",
-                        "on-surface":    "#0a0a0a",
-                        /* ── True-black dark surfaces ── */
+                        "on-primary": "#ffffff",
+                        "surface": "#f8fafc",
+                        "surface-card": "#ffffff",
+                        "surface-alt": "#f1f5f9",
+                        "border-subtle": "#e2e8f0",
+                        "border-hover": "#cbd5e1",
+                        "on-surface": "#0f172a",
+                        "on-surface-variant": "#475569",
+                        "outline": "#64748b",
+                        "brand-accent": "#818cf8",
+                        "emerald-tag": "#059669",
+                        "emerald-bg": "#ecfdf5",
+                        "amber-tag": "#d97706",
+                        "amber-bg": "#fffbeb",
+                        "blue-tag": "#2563eb",
+                        "blue-bg": "#eff6ff",
+                        /* True-black dark surface tokens */
                         "d-bg":      "#000000",
-                        "d-card":    "#0a0a0a",
-                        "d-raised":  "#111111",
-                        "d-border":  "#1c1c1c",
-                        "d-border2": "#282828",
+                        "d-card":    "#0c0c0c",
+                        "d-raised":  "#141414",
+                        "d-border":  "#1e1e1e",
+                        "d-border2": "#2a2a2a",
+                        "d-muted":   "#8a8a8a",
+                        "d-dim":     "#5a5a5a"
                     },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
                     },
                     animation: {
-                        'fade-in':   'fadeIn .3s ease-out',
-                        'slide-up':  'slideUp .4s cubic-bezier(.22,1,.36,1)',
+                        'fade-in': 'fadeIn .35s ease-out',
+                        'slide-up': 'slideUp .4s cubic-bezier(.22,1,.36,1)',
                         'pulse-dot': 'pulseDot 2s ease-in-out infinite'
                     },
                     keyframes: {
-                        fadeIn:   { '0%':{ opacity:'0' },                                '100%':{ opacity:'1' }},
-                        slideUp:  { '0%':{ opacity:'0', transform:'translateY(12px)' },  '100%':{ opacity:'1', transform:'translateY(0)' }},
-                        pulseDot: { '0%,100%':{ opacity:'1' }, '50%':{ opacity:'.4' }}
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' }},
+                        slideUp: { '0%': { opacity: '0', transform: 'translateY(12px)' }, '100%': { opacity: '1', transform: 'translateY(0)' }},
+                        pulseDot: { '0%,100%': { opacity: '1' }, '50%': { opacity: '.4' }}
                     }
                 }
             }
@@ -73,47 +71,94 @@
     </script>
 
     <style>
-        /* ── Scrollbar ── */
-        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 999px; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* ── True-black dark mode ── */
+        /* ======== TRUE BLACK DARK MODE OVERRIDES ======== */
         html.dark { background: #000; color-scheme: dark; }
         html.dark body { background: #000 !important; }
 
-        /* ── Smooth page animation ── */
-        #app-root > * { animation: fadeIn .25s ease-out; }
+        /* Backgrounds — force pure black / near-black */
+        .dark .dark\:bg-slate-950  { background-color: #000000 !important; }
+        .dark .dark\:bg-slate-900  { background-color: #0a0a0a !important; }
+        .dark .dark\:bg-slate-800  { background-color: #111111 !important; }
+        .dark .dark\:bg-slate-700  { background-color: #1a1a1a !important; }
+        .dark .dark\:bg-slate-900\/90 { background-color: rgba(0,0,0,.92) !important; }
+        .dark .dark\:bg-slate-900\/40 { background-color: rgba(0,0,0,.4) !important; }
 
-        /* ── Card hover lift ── */
+        /* Borders — neutral gray, no blue */
+        .dark .dark\:border-slate-800 { border-color: #1e1e1e !important; }
+        .dark .dark\:border-slate-700 { border-color: #272727 !important; }
+        .dark .dark\:border-slate-700\/60 { border-color: rgba(39,39,39,.6) !important; }
+        .dark .dark\:border-slate-600 { border-color: #333333 !important; }
+
+        /* Text — warm white / neutral gray */
+        .dark .dark\:text-white    { color: #f0f0f0 !important; }
+        .dark .dark\:text-slate-100 { color: #e5e5e5 !important; }
+        .dark .dark\:text-slate-200 { color: #d4d4d4 !important; }
+        .dark .dark\:text-slate-300 { color: #a3a3a3 !important; }
+        .dark .dark\:text-slate-400 { color: #737373 !important; }
+        .dark .dark\:text-slate-500 { color: #525252 !important; }
+
+        /* Hover states */
+        .dark .dark\:hover\:bg-slate-700:hover { background-color: #1f1f1f !important; }
+        .dark .dark\:hover\:bg-slate-800:hover { background-color: #161616 !important; }
+
+        /* Indigo accent tokens — slightly warmer in dark */
+        .dark .dark\:bg-indigo-950  { background-color: #0f0a1f !important; }
+        .dark .dark\:bg-indigo-900  { background-color: #1a1040 !important; }
+        .dark .dark\:bg-indigo-950\/60 { background-color: rgba(15,10,31,.6) !important; }
+        .dark .dark\:text-indigo-300 { color: #a5b4fc !important; }
+        .dark .dark\:text-indigo-400 { color: #818cf8 !important; }
+
+        /* Colored sub-surfaces (rose, emerald, amber, etc.) */
+        .dark .dark\:bg-rose-950\/30 { background-color: rgba(20,0,5,.3) !important; }
+        .dark .dark\:bg-rose-900\/30 { background-color: rgba(25,0,8,.3) !important; }
+        .dark .dark\:bg-emerald-950 { background-color: rgba(0,18,8,1) !important; }
+        .dark .dark\:bg-emerald-900\/30 { background-color: rgba(0,18,8,.3) !important; }
+        .dark .dark\:bg-amber-950  { background-color: rgba(18,12,0,1) !important; }
+        .dark .dark\:bg-amber-900\/20 { background-color: rgba(18,12,0,.2) !important; }
+        .dark .dark\:bg-orange-900\/20 { background-color: rgba(18,10,0,.2) !important; }
+        .dark .dark\:bg-rose-900\/20 { background-color: rgba(18,0,4,.2) !important; }
+        .dark .dark\:bg-blue-950   { background-color: rgba(0,5,20,1) !important; }
+
+        /* Focus ring */
+        .dark *:focus-visible { outline-color: #6366f1; }
+
+        /* Smooth page transitions */
+        #app-root > * { animation: fadeIn .3s ease-out; }
+
+        /* Card lift on hover */
         .card-lift { transition: transform .2s ease, box-shadow .2s ease; }
-        .card-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
-        .dark .card-lift:hover { box-shadow: 0 8px 30px rgba(0,0,0,.7); }
+        .card-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,.15); }
+        .dark .card-lift:hover { box-shadow: 0 8px 30px rgba(0,0,0,.6); }
 
-        /* ── Line clamp ── */
+        /* Line clamp utilities */
         .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     </style>
 </head>
-<body class="bg-surface dark:bg-black text-on-surface dark:text-neutral-200 font-sans min-h-screen selection:bg-indigo-200/60 selection:text-indigo-900 transition-colors duration-150">
+<body class="bg-surface dark:bg-d-bg text-on-surface dark:text-neutral-200 font-sans min-h-screen selection:bg-indigo-200/60 selection:text-indigo-900 transition-colors duration-150">
     
-    <!-- Header: dark:bg-black so it matches the body exactly -->
-    <header class="fixed top-0 inset-x-0 z-50 bg-white/90 dark:bg-black/90 backdrop-blur-xl border-b border-border-subtle dark:border-d-border" id="app-header">
+    <header class="fixed top-0 inset-x-0 z-50 bg-white/90 dark:bg-d-bg/92 backdrop-blur-xl border-b border-border-subtle dark:border-d-border" id="app-header">
     </header>
 
-    <main class="w-full pt-16 bg-surface dark:bg-black min-h-[calc(100vh-64px)] pb-20 md:pb-0" id="app-root">
+    <main class="w-full pt-16 bg-surface dark:bg-d-bg min-h-[calc(100vh-64px)] pb-20 md:pb-0" id="app-root">
     </main>
 
     <!-- Mobile Bottom Nav -->
-    <nav class="fixed bottom-0 inset-x-0 z-50 md:hidden bg-white/95 dark:bg-black/95 backdrop-blur-xl border-t border-border-subtle dark:border-d-border py-1" id="mobile-nav">
+    <nav class="fixed bottom-0 inset-x-0 z-50 md:hidden bg-white/95 dark:bg-d-card/95 backdrop-blur-xl border-t border-border-subtle dark:border-d-border py-1" id="mobile-nav">
     </nav>
 
     <!-- Toast Container -->
     <div class="fixed top-20 right-6 z-[200] flex flex-col gap-2 pointer-events-none" id="toast-container"></div>
     
+    <!-- AI Modal Container -->
     <div id="ai-modal-container"></div>
 
     <script src="./views.js"></script>

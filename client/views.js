@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────────
-//  Header + Home View
+//  Header + Home View  (views.js)
 // ──────────────────────────────────────────────────
 
 const renderHeader = () => {
@@ -8,7 +8,7 @@ const renderHeader = () => {
 
     const navLink = (hash, label, icon) => {
         const active = r === hash;
-        return `<a class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all ${active ? 'bg-primary/10 text-primary dark:text-indigo-400 font-semibold' : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800'}" href="${hash}">
+        return `<a class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all ${active ? 'bg-primary/10 text-primary dark:text-indigo-400 font-semibold' : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800/60'}" href="${hash}">
             <span class="material-symbols-outlined text-[18px]">${icon}</span>${label}
         </a>`;
     };
@@ -16,30 +16,30 @@ const renderHeader = () => {
     const userMenu = state.user ? `
     <div class="relative group">
         <button aria-label="User menu" class="flex items-center gap-1.5 focus:outline-none" type="button">
-            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-white font-semibold flex items-center justify-center text-[11px] tracking-wide shadow-sm ring-2 ring-white dark:ring-black">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-white font-semibold flex items-center justify-center text-[11px] tracking-wide shadow-sm ring-2 ring-white dark:ring-d-card">
                 ${state.user.name.substring(0, 2).toUpperCase()}
             </div>
         </button>
-        <div class="absolute right-0 mt-2 w-56 py-1.5 rounded-xl bg-white dark:bg-neutral-900 shadow-2xl border border-neutral-200 dark:border-neutral-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-            <div class="px-4 py-3 border-b border-neutral-100 dark:border-neutral-800">
+        <div class="absolute right-0 mt-2 w-56 py-1.5 rounded-xl bg-white dark:bg-d-raised shadow-2xl border border-neutral-200 dark:border-d-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="px-4 py-3 border-b border-neutral-100 dark:border-d-border">
                 <p class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">${state.user.name}</p>
                 <p class="text-[11px] text-neutral-500 dark:text-neutral-500 mt-0.5">${state.user.email}</p>
             </div>
-            <a class="flex items-center gap-2 px-4 py-2.5 text-[13px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors" href="#/my-activity">
+            <a class="flex items-center gap-2 px-4 py-2.5 text-[13px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-d-card transition-colors" href="#/my-activity">
                 <span class="material-symbols-outlined text-[17px]">person</span> My Activity
             </a>
-            ${(state.user.role === 'MODERATOR' || state.user.role === 'ADMIN') ? `<a class="flex items-center gap-2 px-4 py-2.5 text-[13px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors" href="#/moderation">
+            ${(state.user.role === 'MODERATOR' || state.user.role === 'ADMIN') ? `<a class="flex items-center gap-2 px-4 py-2.5 text-[13px] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-d-card transition-colors" href="#/moderation">
                 <span class="material-symbols-outlined text-[17px]">shield</span> Moderation Queue
             </a>` : ''}
-            <div class="border-t border-neutral-100 dark:border-neutral-800 mt-1 pt-1">
-                <button class="w-full flex items-center gap-2 px-4 py-2.5 text-[13px] text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors" onclick="logout()">
+            <div class="border-t border-neutral-100 dark:border-d-border mt-1 pt-1">
+                <button class="w-full flex items-center gap-2 px-4 py-2.5 text-[13px] text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors" onclick="logout()">
                     <span class="material-symbols-outlined text-[17px]">logout</span> Sign out
                 </button>
             </div>
         </div>
     </div>
     ` : `
-    <a href="#/login" class="text-[13px] font-semibold text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors px-3 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800">Login</a>
+    <a href="#/login" class="text-[13px] font-semibold text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors px-3 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/60">Login</a>
     `;
 
     header.innerHTML = `
@@ -50,7 +50,7 @@ const renderHeader = () => {
             </div>
             <div class="flex flex-col leading-tight">
                 <span class="text-[15px] font-bold tracking-tight text-neutral-900 dark:text-white group-hover:text-primary transition-colors">Vicinus</span>
-                <span class="hidden lg:block text-[10px] text-neutral-400 dark:text-neutral-600 font-medium uppercase tracking-widest">Community · Info</span>
+                <span class="hidden lg:block text-[10px] text-neutral-400 dark:text-neutral-500 font-medium uppercase tracking-widest">Community · Info</span>
             </div>
         </a>
         
@@ -60,7 +60,7 @@ const renderHeader = () => {
         </nav>
 
         <div class="flex items-center gap-2">
-            <button aria-label="Toggle Theme" class="w-9 h-9 rounded-lg bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-900 dark:hover:bg-neutral-800 text-neutral-500 dark:text-neutral-400 flex items-center justify-center transition-colors" onclick="const isDark = document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light');" type="button">
+            <button aria-label="Toggle Theme" class="w-9 h-9 rounded-lg bg-neutral-100 hover:bg-neutral-200 dark:bg-d-raised dark:hover:bg-d-border text-neutral-500 dark:text-neutral-400 flex items-center justify-center transition-colors" onclick="const isDark = document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light');" type="button">
                 <span class="material-symbols-outlined text-[19px] dark:hidden">dark_mode</span>
                 <span class="material-symbols-outlined text-[19px] hidden dark:inline">light_mode</span>
             </button>
@@ -78,7 +78,7 @@ const renderHeader = () => {
     if (mobileNav) {
         const mNavLink = (hash, label, icon) => {
             const active = r === hash;
-            return `<a class="flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-lg transition-colors ${active ? 'text-primary dark:text-indigo-400' : 'text-neutral-400 dark:text-neutral-600'}" href="${hash}">
+            return `<a class="flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-lg transition-colors ${active ? 'text-primary dark:text-indigo-400' : 'text-neutral-400 dark:text-neutral-500'}" href="${hash}">
                 <span class="material-symbols-outlined text-[22px]">${icon}</span>
                 <span class="text-[10px] font-medium">${label}</span>
             </a>`;
@@ -95,7 +95,8 @@ const renderHeader = () => {
             </a>
             ${mNavLink('#/my-activity', 'Activity', 'person')}
             ${state.user ? mNavLink('#/my-activity', 'Profile', 'account_circle') : mNavLink('#/login', 'Login', 'login')}
-        </div>`;
+        </div>
+        `;
     }
 };
 
@@ -106,9 +107,9 @@ const renderHome = async (root) => {
         const info = res.information || [];
         
         const feedHTML = info.length === 0
-            ? `<div class="col-span-full p-12 text-center text-neutral-500 dark:text-neutral-600 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800">No information shared yet. Be the first!</div>`
+            ? `<div class="col-span-full p-12 text-center text-neutral-500 dark:text-neutral-600 bg-white dark:bg-d-card rounded-xl border border-neutral-200 dark:border-d-border">No information shared yet. Be the first to contribute!</div>`
             : info.map(item => `
-            <div class="card-lift bg-white dark:bg-neutral-900 p-5 rounded-xl border border-neutral-200 dark:border-neutral-800 cursor-pointer group" onclick="navigate('#/information/${item._id}')">
+            <div class="card-lift bg-white dark:bg-d-card p-5 rounded-xl border border-neutral-200 dark:border-d-border cursor-pointer group" onclick="navigate('#/information/${item._id}')">
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
                         ${getStatusBadge(item.status)}
@@ -127,10 +128,10 @@ const renderHome = async (root) => {
 
         root.innerHTML = `
         <!-- Hero -->
-        <section class="relative w-full bg-white dark:bg-black border-b border-neutral-200 dark:border-neutral-800 overflow-hidden">
+        <section class="relative w-full bg-white dark:bg-d-bg border-b border-neutral-200 dark:border-d-border overflow-hidden">
             <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(99,102,241,.06),transparent_70%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(99,102,241,.08),transparent_70%)]"></div>
             <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 flex flex-col items-center text-center">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 mb-5 animate-fade-in">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 dark:bg-d-raised border border-neutral-200 dark:border-d-border mb-5 animate-fade-in">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-dot"></span>
                     <span class="text-[12px] font-medium text-neutral-600 dark:text-neutral-400">Live Community Updates</span>
                 </div>
@@ -142,7 +143,7 @@ const renderHome = async (root) => {
                 </p>
                 
                 <div class="w-full max-w-2xl relative animate-slide-up" style="animation-delay:.15s">
-                    <div class="relative flex items-center rounded-2xl bg-white dark:bg-neutral-900 shadow-lg dark:shadow-2xl border border-neutral-200 dark:border-neutral-800 p-1.5 transition-all focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary/50">
+                    <div class="relative flex items-center rounded-2xl bg-white dark:bg-d-card shadow-lg dark:shadow-2xl border border-neutral-200 dark:border-d-border p-1.5 transition-all focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary/50">
                         <div class="pl-3 pr-1 text-neutral-400 dark:text-neutral-500 flex items-center">
                             <span class="material-symbols-outlined text-[22px]">search</span>
                         </div>
@@ -151,21 +152,22 @@ const renderHome = async (root) => {
                             Search
                         </button>
                     </div>
-                    <div id="home-search-results" class="hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-900 rounded-xl shadow-2xl border border-neutral-200 dark:border-neutral-800 p-2 z-40 text-left max-h-80 overflow-y-auto"></div>
+                    <div id="home-search-results" class="hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-d-card rounded-xl shadow-2xl border border-neutral-200 dark:border-d-border p-2 z-40 text-left max-h-80 overflow-y-auto"></div>
                 </div>
 
+                <!-- Quick filter pills -->
                 <div class="mt-6 flex flex-wrap items-center justify-center gap-2 animate-fade-in" style="animation-delay:.25s">
-                    <span class="text-[11px] text-neutral-400 dark:text-neutral-600 font-medium mr-1">Popular:</span>
+                    <span class="text-[11px] text-neutral-400 dark:text-neutral-500 font-medium mr-1">Popular:</span>
                     ${['🎓 Internships', '💰 Scholarships', '🎉 Events', '🔎 Lost & Found', '🚨 Emergencies'].map(label => {
                         const val = label.split(' ').slice(1).join(' ');
-                        return `<button class="px-3 py-1 rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-900 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-[12px] font-medium transition-colors border border-neutral-200 dark:border-neutral-800" onclick="document.getElementById('home-search').value='${val}';performHomeSearch()">${label}</button>`;
+                        return `<button class="px-3 py-1 rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-d-raised dark:hover:bg-d-border text-neutral-600 dark:text-neutral-400 text-[12px] font-medium transition-colors border border-neutral-200 dark:border-d-border" onclick="document.getElementById('home-search').value='${val}';performHomeSearch()">${label}</button>`;
                     }).join('')}
                 </div>
             </div>
         </section>
 
         <!-- Feed -->
-        <section class="w-full py-10 bg-surface dark:bg-black">
+        <section class="w-full py-10 bg-surface dark:bg-d-bg">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-lg font-bold text-neutral-900 dark:text-white flex items-center gap-2">
@@ -175,7 +177,7 @@ const renderHome = async (root) => {
                         View all <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </a>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
                     ${feedHTML}
                 </div>
             </div>
@@ -191,20 +193,20 @@ window.performHomeSearch = async () => {
     const resBox = document.getElementById('home-search-results');
     if (!q) { resBox.classList.add('hidden'); return; }
     
-    resBox.innerHTML = '<div class="p-4 text-center text-neutral-500"><span class="material-symbols-outlined animate-spin text-sm">sync</span> Searching…</div>';
+    resBox.innerHTML = '<div class="p-4 text-center text-neutral-500 dark:text-neutral-500"><span class="material-symbols-outlined animate-spin text-sm">sync</span> Searching…</div>';
     resBox.classList.remove('hidden');
 
     try {
         const res = await fetchAPI(`/information?search=${encodeURIComponent(q)}&limit=5`);
         if (res.information.length === 0) {
-            resBox.innerHTML = '<div class="p-4 text-center text-neutral-500">No results found.</div>';
+            resBox.innerHTML = '<div class="p-4 text-center text-neutral-500 dark:text-neutral-500">No results found.</div>';
             return;
         }
         resBox.innerHTML = res.information.map(item => `
-            <div class="px-3 py-2.5 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-lg cursor-pointer flex items-center gap-3 group transition-colors" onclick="navigate('#/information/${item._id}')">
+            <div class="px-3 py-2.5 hover:bg-neutral-50 dark:hover:bg-d-raised rounded-lg cursor-pointer flex items-center gap-3 group transition-colors" onclick="navigate('#/information/${item._id}')">
                 <div class="flex-1 min-w-0">
                     <p class="text-[13px] font-medium text-neutral-800 dark:text-neutral-200 group-hover:text-primary truncate">${item.title}</p>
-                    <p class="text-[11px] text-neutral-400 dark:text-neutral-600">${item.location} · ${timeAgo(item.createdAt)}</p>
+                    <p class="text-[11px] text-neutral-400 dark:text-neutral-500">${item.location} · ${timeAgo(item.createdAt)}</p>
                 </div>
                 ${getStatusBadge(item.status)}
             </div>
