@@ -63,24 +63,16 @@ app.use('/api/notifications', notificationsRoutes);
 app.use('/api/communities', communitiesRoutes);
 app.use('/api/questions', questionsRoutes);
 
-// Serve client static files directly and at /client
+// Optionally serve client static files if accessed directly
 const clientPath = path.join(__dirname, '../../client');
-app.use(express.static(clientPath));
 app.use('/client', express.static(clientPath));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(clientPath, 'index.html'));
-});
 
 // 404 Route Catch-All
 app.use((req, res) => {
-  if (req.path.startsWith('/api')) {
-    return res.status(404).json({
-      success: false,
-      message: `API Route ${req.originalUrl} not found on LocalLoop server`
-    });
-  }
-  res.sendFile(path.join(clientPath, 'index.html'));
+  res.status(404).json({
+    success: false,
+    message: `API Route ${req.originalUrl} not found on LocalLoop server`
+  });
 });
 
 // Global Error Handler
