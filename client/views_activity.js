@@ -1,5 +1,6 @@
 // My Activity View
 const renderMyActivity = async (root) => {
+<<<<<<< Updated upstream
     if (!state.user) return navigate('#/login');
     try {
         root.innerHTML = '<div class="p-12 text-center"><span class="material-symbols-outlined animate-spin text-primary text-3xl">sync</span></div>';
@@ -39,4 +40,64 @@ const renderMyActivity = async (root) => {
             </div>
         </div>`;
     } catch (e) { root.innerHTML = `<div class="p-12 text-center text-rose-500">Failed to load activity.</div>`; }
+=======
+    if (!state.user) {
+        return navigate('#/login');
+    }
+
+    try {
+        root.innerHTML = '<div class="p-12 text-center"><span class="material-symbols-outlined animate-spin text-primary text-4xl">sync</span></div>';
+        
+        const [postsRes, savedRes] = await Promise.all([
+            fetchAPI('/me/posts'),
+            fetchAPI('/me/saved')
+        ]);
+
+        const renderItems = (items) => {
+            if (items.length === 0) return '<div class="text-sm text-slate-500 py-4">No items found.</div>';
+            return items.map(item => `
+                <div class="flex items-center justify-between py-3 border-b border-slate-100 dark:border-slate-700 last:border-0 cursor-pointer group" onclick="navigate('#/information/${item._id}')">
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-primary">${item.title}</h4>
+                        <div class="flex items-center gap-2 mt-1">
+                            ${getStatusBadge(item.status)}
+                            <span class="text-xs text-slate-500">${timeAgo(item.createdAt)}</span>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-slate-400 group-hover:text-primary">chevron_right</span>
+                </div>
+            `).join('');
+        };
+
+        root.innerHTML = `
+        <div class="max-w-4xl mx-auto px-4 py-8">
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">My Activity</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Shared -->
+                <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">campaign</span> Shared by Me (${postsRes.count})
+                    </h3>
+                    <div class="flex flex-col">
+                        ${renderItems(postsRes.posts)}
+                    </div>
+                </div>
+
+                <!-- Saved -->
+                <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">bookmark</span> Saved Items (${savedRes.count})
+                    </h3>
+                    <div class="flex flex-col">
+                        ${renderItems(savedRes.posts)}
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    } catch (e) {
+        root.innerHTML = `<div class="p-12 text-center text-rose-500">Failed to load activity.</div>`;
+    }
+>>>>>>> Stashed changes
 };

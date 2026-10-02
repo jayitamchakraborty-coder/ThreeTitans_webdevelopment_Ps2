@@ -11,11 +11,13 @@ const connectDB = require('./config/db');
 
 // Import Route Handlers
 const authRoutes = require('./routes/auth.routes');
-const postsRoutes = require('./routes/posts.routes');
+const informationRoutes = require('./routes/information.routes');
 const moderationRoutes = require('./routes/moderation.routes');
 const usersRoutes = require('./routes/users.routes');
 const aiRoutes = require('./routes/ai.routes');
 const notificationsRoutes = require('./routes/notifications.routes');
+const communitiesRoutes = require('./routes/communities.routes');
+const questionsRoutes = require('./routes/questions.routes');
 
 // Connect to Database
 connectDB();
@@ -53,11 +55,13 @@ app.get('/api/health', (req, res) => {
 
 // Mount API Endpoints
 app.use('/api/auth', authRoutes);
-app.use('/api/posts', postsRoutes);
+app.use('/api/information', informationRoutes);
 app.use('/api/moderation', moderationRoutes);
-app.use('/api/users', usersRoutes);
+app.use('/api/me', usersRoutes); // me
 app.use('/api/ai', aiRoutes);
 app.use('/api/notifications', notificationsRoutes);
+app.use('/api/communities', communitiesRoutes);
+app.use('/api/questions', questionsRoutes);
 
 // Optionally serve client static files if accessed directly
 const clientPath = path.join(__dirname, '../../client');

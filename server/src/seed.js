@@ -6,8 +6,11 @@ const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const User = require('./models/User');
-const Post = require('./models/Post');
+const Information = require('./models/Information');
 const Notification = require('./models/Notification');
+const Community = require('./models/Community');
+const History = require('./models/History');
+const Question = require('./models/Question');
 
 const seedData = async () => {
   try {
@@ -17,198 +20,140 @@ const seedData = async () => {
 
     // Clean existing data
     await User.deleteMany({});
-    await Post.deleteMany({});
+    await Information.deleteMany({});
     await Notification.deleteMany({});
+    await Community.deleteMany({});
+    await History.deleteMany({});
+    await Question.deleteMany({});
+    
     console.log('[Seed] Cleared existing records.');
 
-    // Seed Demo Users
+    // Seed Communities
+    const kurlaCommunity = await Community.create({
+        name: 'DBIT / Kurla',
+        description: 'Local updates for DBIT campus and Kurla residents',
+        location: 'Kurla West'
+    });
+    
+    const bandraCommunity = await Community.create({
+        name: 'Bandra West',
+        description: 'Bandra community noticeboard',
+        location: 'Bandra West'
+    });
+
+    // Seed Demo Users for Vicinus
     const salt = await bcrypt.genSalt(10);
-    const demoPasswordHash = await bcrypt.hash('localloop2026', salt);
+    const demoPasswordHash = await bcrypt.hash('Demo@123', salt);
+    const modPasswordHash = await bcrypt.hash('Moderator@123', salt);
 
     const resident = await User.create({
       name: 'Aarav Sharma',
-      email: 'resident@localloop.org',
+      email: 'demo@vicinus.local',
       passwordHash: demoPasswordHash,
-      locality: 'DBIT/Kurla',
-      role: 'resident',
-      isVerified: true,
-      avatarUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=160&q=80',
-      stats: { postsShared: 4, helpfulVotes: 28, updatesAccepted: 3 }
+      role: 'USER',
+      communities: [kurlaCommunity._id]
     });
 
     const moderator = await User.create({
       name: 'Priya Deshmukh',
-      email: 'moderator@localloop.org',
-      passwordHash: demoPasswordHash,
-      locality: 'DBIT/Kurla',
-      role: 'moderator',
-      isVerified: true,
-      avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80',
-      stats: { postsShared: 6, helpfulVotes: 74, updatesAccepted: 12 }
+      email: 'moderator@vicinus.local',
+      passwordHash: modPasswordHash,
+      role: 'MODERATOR',
+      communities: [kurlaCommunity._id]
     });
 
-    const admin = await User.create({
-      name: 'Rahul Varma',
-      email: 'admin@localloop.org',
-      passwordHash: demoPasswordHash,
-      locality: 'Bandra West',
-      role: 'admin',
-      isVerified: true,
-      avatarUrl: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=160&q=80',
-      stats: { postsShared: 10, helpfulVotes: 142, updatesAccepted: 25 }
+    console.log('[Seed] Created demo user and moderator');
+    
+    kurlaCommunity.members.push(resident._id, moderator._id);
+    await kurlaCommunity.save();
+
+    // Seed Information
+    const info1 = await Information.create({
+      title: 'DBIT Hackathon 2026',
+      description: 'Register for the premier 24-hour hackathon. Cash prizes up to 1L.',
+      category: 'events',
+      type: 'EVENT',
+      location: 'DBIT Campus',
+      communityId: kurlaCommunity._id,
+      authorId: moderator._id,
+      authorName: moderator.name,
+      authorRole: moderator.role,
+      status: 'VERIFIED',
+      eventDate: '2026-10-15',
+      helpfulCount: 15,
+      helpfulUsers: [resident._id]
     });
 
-    console.log('[Seed] Created 3 demo users (resident, moderator, admin)');
+    const info2 = await Information.create({
+      title: 'Lost Keys near Canteen',
+      description: 'Found a bunch of keys with a blue Honda keychain near the central canteen. Submitted to security.',
+      category: 'lost_found',
+      type: 'LOST_FOUND',
+      location: 'Central Canteen',
+      communityId: kurlaCommunity._id,
+      authorId: resident._id,
+      authorName: resident.name,
+      authorRole: resident.role,
+      status: 'NEEDS_VERIFICATION'
+    });
 
-    // Seed Realistic Posts matching the Stitch frontend UI mocks
-    const posts = [
-      {
-        title: 'Emergency Water Pipeline Repair Notice on CST Road',
-        description: 'BMC will be undertaking urgent repairs on the main 600mm distribution pipeline opposite Kurla Station West. Water supply will be curtailed by 50% between 10 AM and 6 PM. Residents are advised to store sufficient water in advance.',
-        category: 'emergencies',
-        location: 'CST Road near Kurla Station West',
-        locality: 'DBIT/Kurla',
-        date: '2026-10-03',
-        time: '10:00 AM - 6:00 PM',
-        link: 'https://portal.mcgm.gov.in',
-        status: 'verified',
-        urgency: 'high',
-        helpfulCount: 47,
-        author: moderator._id,
-        authorName: moderator.name,
-        authorRole: moderator.role,
-        rawInput: 'Urgent BMC notice: 50% water cut tomorrow due to pipeline repair work at Kurla CST road from 10am to 6pm. Please store water.'
-      },
-      {
-        title: 'DBIT Annual Hackathon & AI Project Showcase 2026',
-        description: 'Don Bosco Institute of Technology is hosting its premier 24-hour inter-collegiate hackathon. Open to all engineering students with tracks in Civic Tech, Generative AI, and Sustainable Cities. Free registration, mentorship from industry leads, and cash pool of ₹1,00,000.',
-        category: 'events',
-        location: 'Mendonca Auditorium, DBIT Campus, Premier Lines',
-        locality: 'DBIT/Kurla',
-        date: '2026-10-15',
-        time: '09:00 AM onwards',
-        link: 'https://dbit.in/hackathon-2026',
-        status: 'verified',
-        urgency: 'medium',
-        helpfulCount: 89,
-        author: resident._id,
-        authorName: resident.name,
-        authorRole: resident.role,
-        rawInput: 'Hey everyone, registrations for DBIT Hackathon 2026 are live! Cash prizes of 1L. Venue is Mendonca hall on Oct 15.'
-      },
-      {
-        title: 'Junior Frontend Developer Internship (React / Node.js)',
-        description: 'Bandra-based civic tech startup is hiring a motivated frontend intern. Flexible hybrid schedule, hands-on experience with modern web stacks, and a competitive monthly stipend of ₹18,000. Suitable for pre-final and final year undergrads.',
-        category: 'internship',
-        location: 'Pali Hill Incubator, Bandra West',
-        locality: 'Bandra West',
-        date: 'Apply by 2026-10-10',
-        time: 'Flexible Hours',
-        link: 'https://angel.co/company/civicpulse/jobs',
-        status: 'verified',
-        urgency: 'medium',
-        helpfulCount: 34,
-        author: admin._id,
-        authorName: admin.name,
-        authorRole: admin.role,
-        rawInput: 'We are hiring a frontend dev intern at Bandra West incubator. React/Node, 18k stipend. Apply before 10th Oct.'
-      },
-      {
-        title: 'Lost Black Leather Wallet with Student ID near Central Canteen',
-        description: 'Misplaced a black Bellroy leather wallet containing DBIT student identification card (Roll No. 221045), metro pass, and some cash. If found, please return to DBIT main security desk or contact via message.',
-        category: 'lost_found',
-        location: 'Central Canteen lawn, DBIT Campus',
-        locality: 'DBIT/Kurla',
-        date: '2026-10-02',
-        time: '01:30 PM',
-        status: 'needs-verification',
-        urgency: 'medium',
-        helpfulCount: 12,
-        author: resident._id,
-        authorName: resident.name,
-        authorRole: resident.role,
-        rawInput: 'Lost my wallet around 1:30pm today near central canteen. Has my DBIT id card. Please ping if found.'
-      },
-      {
-        title: 'Dangerous Open Pothole at Hill Road Junction',
-        description: 'Large unmarked pothole right after the traffic signal turning into Hill Road. Two two-wheelers skidded last night during the drizzle. Needs immediate municipal barricading and asphalt patching.',
-        category: 'infrastructure',
-        location: 'Hill Road Junction near St. Joseph School',
-        locality: 'Bandra West',
-        date: '2026-10-01',
-        time: 'Reported 08:00 AM',
-        status: 'under-review',
-        urgency: 'high',
-        helpfulCount: 23,
-        author: resident._id,
-        authorName: resident.name,
-        authorRole: resident.role,
-        reports: [
-          {
-            reporterId: admin._id,
-            reason: 'Accurate and needs urgent municipal escalation.',
-            timestamp: new Date()
-          }
-        ]
-      },
-      {
-        title: 'Mumbai Merit Merit-cum-Means Higher Education Scholarship',
-        description: 'Government of Maharashtra social welfare department scholarship portal is now accepting applications for STEM college students. Covers up to 80% tuition fees for eligible students from Mumbai suburban district.',
-        category: 'scholarships',
-        location: 'Online Portal / District Collector Office',
-        locality: 'Andheri East',
-        date: 'Deadline: 2026-10-31',
-        time: 'Online Submission',
-        link: 'https://mahadbt.maharashtra.gov.in',
-        status: 'verified',
-        urgency: 'low',
-        helpfulCount: 65,
-        author: admin._id,
-        authorName: admin.name,
-        authorRole: admin.role
-      },
-      {
-        title: 'Garbage Collection Delayed in Sector 4 Powai',
-        description: 'Waste collection van hasn’t visited Sector 4 residential complexes for two consecutive mornings. Green bins are overflowing near the park entrance.',
-        category: 'local-issues',
-        location: 'Sector 4 Central Park Avenue',
-        locality: 'Powai Central',
-        date: '2026-10-02',
-        time: 'Morning',
-        status: 'needs-verification',
-        urgency: 'medium',
-        helpfulCount: 8,
-        author: resident._id,
-        authorName: resident.name,
-        authorRole: resident.role
-      }
-    ];
+    // Item hitting report threshold
+    const info3 = await Information.create({
+      title: 'Free Laptop Distribution Scheme',
+      description: 'Click this unknown link to register for free laptops from government.',
+      category: 'announcements',
+      type: 'NOTICE',
+      location: 'All Mumbai',
+      communityId: kurlaCommunity._id,
+      authorId: resident._id,
+      authorName: resident.name,
+      authorRole: resident.role,
+      status: 'UNDER_REVIEW',
+      reportCount: 3,
+      reportThreshold: 3,
+      reviewRequired: true,
+      reports: [
+          { userId: moderator._id, reason: 'SPAM', description: 'Suspicious link' },
+          { userId: resident._id, reason: 'MISLEADING', description: 'Fake news' },
+          { userId: resident._id, reason: 'SPAM', description: 'Scam' }
+      ]
+    });
 
-    const createdPosts = await Post.insertMany(posts);
-    console.log(`[Seed] Seeded ${createdPosts.length} posts successfully.`);
+    const info4 = await Information.create({
+      title: 'Web Dev Internship',
+      description: 'Startup in Bandra looking for React developers. 15k stipend.',
+      category: 'internships',
+      type: 'NOTICE',
+      location: 'Bandra',
+      communityId: bandraCommunity._id,
+      authorId: moderator._id,
+      authorName: moderator.name,
+      authorRole: moderator.role,
+      status: 'VERIFIED'
+    });
 
-    // Bookmark some posts for demo user
-    resident.savedPosts = [createdPosts[0]._id, createdPosts[1]._id];
-    resident.helpfulPosts = [createdPosts[0]._id, createdPosts[2]._id];
-    await resident.save();
-
-    // Seed Sample Notifications
-    await Notification.create([
-      {
-        userId: resident._id,
-        postId: createdPosts[0]._id,
-        type: 'verification',
-        message: 'Your emergency alert was reviewed and verified by Priya Deshmukh.'
-      },
-      {
-        userId: resident._id,
-        postId: createdPosts[1]._id,
-        type: 'helpful',
-        message: '14 people found your DBIT Hackathon announcement helpful today.'
-      }
+    // History logs
+    await History.create([
+      { informationId: info1._id, action: 'POSTED', actorId: moderator._id },
+      { informationId: info1._id, action: 'VERIFIED', actorId: moderator._id },
+      { informationId: info2._id, action: 'POSTED', actorId: resident._id },
+      { informationId: info3._id, action: 'POSTED', actorId: resident._id },
+      { informationId: info3._id, action: 'REPORTED', actorId: moderator._id },
+      { informationId: info3._id, action: 'UNDER_REVIEW', details: 'Reached report threshold (3)' },
+      { informationId: info4._id, action: 'POSTED', actorId: moderator._id }
     ]);
 
-    console.log('[Seed] Seeded sample notifications and user relationships.');
+    // Seed Q&A
+    const q1 = await Question.create({
+        question: 'Any good places to get cheap printouts near DBIT?',
+        communityId: kurlaCommunity._id,
+        authorId: resident._id,
+        authorName: resident.name,
+        answers: [
+            { authorId: moderator._id, authorName: moderator.name, answer: 'Try the shop next to the main gate, they do bulk for 1 Rs.' }
+        ]
+    });
+
     console.log('[Seed] Database seeding completed successfully! ✨');
     process.exit(0);
   } catch (err) {

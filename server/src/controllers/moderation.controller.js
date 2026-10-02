@@ -1,13 +1,14 @@
-const Post = require('../models/Post');
+const Information = require('../models/Information');
 const User = require('../models/User');
 const Notification = require('../models/Notification');
+const History = require('../models/History');
 const asyncHandler = require('../utils/asyncHandler');
 
 // @desc    Get all items in the moderation queue
 // @route   GET /api/moderation/queue
 // @access  Private (Moderator / Admin)
 const getModerationQueue = asyncHandler(async (req, res) => {
-  const { locality, status } = req.query;
+  const { location, status } = req.query;
 
   const query = {};
 
@@ -16,157 +17,168 @@ const getModerationQueue = asyncHandler(async (req, res) => {
   } else {
     // Default queue: items needing attention
     query.$or = [
-      { status: 'needs-verification' },
-      { status: 'under-review' },
+      { status: 'NEEDS_VERIFICATION' },
+      { status: 'UNDER_REVIEW' },
       { 'reports.0': { $exists: true } },
-      { 'suggestedUpdates.status': 'pending' }
+      { 'updateSuggestions.status': 'PENDING' }
     ];
   }
 
-  if (locality && locality !== 'All Locations' && locality !== 'all') {
-    query.locality = locality;
+  if (location && location !== 'All Locations' && location !== 'all') {
+    query.location = { $regex: new RegExp(location, 'i') };
   }
 
-  const posts = await Post.find(query)
-    .populate('author', 'name email avatarUrl role locality isVerified')
+  const information = await Information.find(query)
+    .populate('authorId', 'name email avatarUrl role locality isVerified')
     .sort({ createdAt: -1 });
 
   // Summary counts for moderator dashboard badges
-  const pendingCount = await Post.countDocuments({ status: 'needs-verification' });
-  const reviewCount = await Post.countDocuments({ status: 'under-review' });
-  const reportedCount = await Post.countDocuments({ 'reports.0': { $exists: true } });
+  const pendingCount = await Information.countDocuments({ status: 'NEEDS_VERIFICATION' });
+  const reviewCount = await Information.countDocuments({ status: 'UNDER_REVIEW' });
+  const reportedCount = await Information.countDocuments({ 'reports.0': { $exists: true } });
 
   res.status(200).json({
     success: true,
-    count: posts.length,
+    count: information.length,
     stats: {
       pendingVerification: pendingCount,
       underReview: reviewCount,
       reported: reportedCount
     },
-    posts
+    information
   });
 });
 
-// @desc    Verify a post (grant verified badge)
-// @route   PATCH /api/moderation/verify/:id
+// @desc    Verify a post
+// @route   POST /api/moderation/:id/verify
 // @access  Private (Moderator / Admin)
 const verifyPost = asyncHandler(async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  if (!post) {
-    return res.status(404).json({ success: false, message: 'Post not found' });
+  const info = await Information.findById(req.params.id);
+  if (!info) {
+    return res.status(404).json({ success: false, message: 'Information not found' });
   }
 
-  post.status = 'verified';
-  await post.save();
+  info.status = 'VERIFIED';
+  info.reviewRequired = false;
+  await info.save();
+
+  await History.create({
+      informationId: info._id,
+      action: 'VERIFIED',
+      actorId: req.user._id,
+      details: 'Verified by moderator'
+  });
 
   // Send notification to author
   await Notification.create({
-    userId: post.author,
-    postId: post._id,
+    userId: info.authorId,
+    informationId: info._id,
     type: 'verification',
-    message: `Your post "${post.title.substring(0, 40)}..." has been verified by the community moderators.`
+    message: `Your post "${info.title.substring(0, 40)}..." has been verified by the community moderators.`
   });
 
   res.status(200).json({
     success: true,
-    message: 'Post successfully verified',
-    post
+    message: 'Information successfully verified',
+    information: info
   });
 });
 
-// @desc    Mark a post as resolved (e.g. lost item found, road repaired)
-// @route   PATCH /api/moderation/resolve/:id
+// @desc    Mark a post as resolved
+// @route   POST /api/moderation/:id/resolve
 // @access  Private (Moderator / Admin / Author)
 const resolvePost = asyncHandler(async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  if (!post) {
-    return res.status(404).json({ success: false, message: 'Post not found' });
+  const info = await Information.findById(req.params.id);
+  if (!info) {
+    return res.status(404).json({ success: false, message: 'Information not found' });
   }
 
-  post.status = 'resolved';
-  await post.save();
+  info.status = 'RESOLVED';
+  info.resolvedAt = new Date();
+  await info.save();
+
+  await History.create({
+    informationId: info._id,
+    action: 'RESOLVED',
+    actorId: req.user._id,
+    details: 'Marked as resolved'
+  });
 
   res.status(200).json({
     success: true,
-    message: 'Post status updated to resolved',
-    post
+    message: 'Information status updated to resolved',
+    information: info
   });
 });
 
-// @desc    Remove/delete a post permanently
-// @route   DELETE /api/moderation/remove/:id
+// @desc    Remove/delete a post (Soft Remove)
+// @route   DELETE /api/moderation/:id
 // @access  Private (Moderator / Admin)
 const removePost = asyncHandler(async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  if (!post) {
-    return res.status(404).json({ success: false, message: 'Post not found' });
+  const info = await Information.findById(req.params.id);
+  if (!info) {
+    return res.status(404).json({ success: false, message: 'Information not found' });
   }
 
   const { reason = 'Content violates community guidelines' } = req.body;
 
-  // Notify author before deletion
-  await Notification.create({
-    userId: post.author,
-    type: 'moderation',
-    message: `Your post "${post.title.substring(0, 40)}..." was removed by moderators. Reason: ${reason}`
+  info.status = 'REMOVED';
+  info.removedReason = reason;
+  info.removedBy = req.user._id;
+  await info.save();
+
+  await History.create({
+    informationId: info._id,
+    action: 'REMOVED',
+    actorId: req.user._id,
+    details: `Removed by Moderator. Reason: ${reason}`
   });
 
-  await Post.findByIdAndDelete(req.params.id);
+  // Notify author before deletion
+  await Notification.create({
+    userId: info.authorId,
+    informationId: info._id,
+    type: 'moderation',
+    message: `Your post "${info.title.substring(0, 40)}..." was removed by moderators. Reason: ${reason}`
+  });
 
   res.status(200).json({
     success: true,
-    message: 'Post successfully removed from LocalLoop'
+    message: 'Information successfully removed from Vicinus'
   });
 });
 
-// @desc    Review and accept or reject a suggested update
-// @route   PATCH /api/moderation/suggested-update/:postId/:updateId
+// @desc    Edit post
+// @route   PUT /api/moderation/:id
 // @access  Private (Moderator / Admin)
-const reviewSuggestedUpdate = asyncHandler(async (req, res) => {
-  const { action } = req.body; // 'accept' or 'reject'
-  const { postId, updateId } = req.params;
-
-  const post = await Post.findById(postId);
-  if (!post) {
-    return res.status(404).json({ success: false, message: 'Post not found' });
-  }
-
-  const update = post.suggestedUpdates.id(updateId);
-  if (!update) {
-    return res.status(404).json({ success: false, message: 'Suggested update not found' });
-  }
-
-  if (action === 'accept') {
-    update.status = 'accepted';
-    // Dynamically apply valid field update
-    const allowedFields = ['title', 'description', 'location', 'date', 'time', 'validUntil', 'link'];
-    if (allowedFields.includes(update.field)) {
-      post[update.field] = update.suggestedValue;
+const editPost = asyncHandler(async (req, res) => {
+    const info = await Information.findById(req.params.id);
+    if (!info) {
+      return res.status(404).json({ success: false, message: 'Information not found' });
     }
-
-    if (update.suggesterId) {
-      await User.findByIdAndUpdate(update.suggesterId, {
-        $inc: { 'stats.updatesAccepted': 1 }
-      });
-      await Notification.create({
-        userId: update.suggesterId,
-        postId: post._id,
-        type: 'update_accepted',
-        message: `Your suggested edit on "${post.title.substring(0, 30)}..." was accepted! Thank you for keeping info accurate.`
-      });
-    }
-  } else {
-    update.status = 'rejected';
-  }
-
-  await post.save();
-
-  res.status(200).json({
-    success: true,
-    message: `Suggested update ${action}ed successfully`,
-    post
-  });
+  
+    const { title, description, category, type, location } = req.body;
+    
+    if (title) info.title = title;
+    if (description) info.description = description;
+    if (category) info.category = category;
+    if (type) info.type = type;
+    if (location) info.location = location;
+  
+    await info.save();
+  
+    await History.create({
+      informationId: info._id,
+      action: 'EDITED',
+      actorId: req.user._id,
+      details: `Edited by Moderator`
+    });
+  
+    res.status(200).json({
+      success: true,
+      message: 'Information updated successfully',
+      information: info
+    });
 });
 
 module.exports = {
@@ -174,5 +186,5 @@ module.exports = {
   verifyPost,
   resolvePost,
   removePost,
-  reviewSuggestedUpdate
+  editPost
 };

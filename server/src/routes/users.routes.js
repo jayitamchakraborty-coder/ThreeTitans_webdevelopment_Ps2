@@ -5,14 +5,16 @@ const {
   getMySavedPosts,
   toggleSavePost,
   getMyHelpfulPosts,
-  getMyStats
+  getMyUpdates,
+  getMyReports
 } = require('../controllers/users.controller');
-const { optionalAuth } = require('../middleware/auth');
+const { protect } = require('../middleware/auth');
 
-router.get('/me/posts', optionalAuth, getMyPosts);
-router.get('/me/saved', optionalAuth, getMySavedPosts);
-router.patch('/me/saved/:postId', optionalAuth, toggleSavePost);
-router.get('/me/helpful', optionalAuth, getMyHelpfulPosts);
-router.get('/me/stats', optionalAuth, getMyStats);
+router.get('/me/posts', protect, getMyPosts);
+router.get('/me/saved', protect, getMySavedPosts);
+router.post('/me/saved/:id', protect, toggleSavePost);
+router.get('/me/helpful', protect, getMyHelpfulPosts);
+router.get('/me/updates', protect, getMyUpdates);
+router.get('/me/reports', protect, getMyReports);
 
 module.exports = router;

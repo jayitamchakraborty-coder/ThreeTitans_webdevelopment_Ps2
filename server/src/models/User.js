@@ -31,8 +31,8 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['resident', 'moderator', 'admin'],
-      default: 'resident'
+      enum: ['USER', 'MODERATOR', 'ADMIN'],
+      default: 'USER'
     },
     isVerified: {
       type: Boolean,
@@ -43,16 +43,22 @@ const UserSchema = new mongoose.Schema(
       helpfulVotes: { type: Number, default: 0 },
       updatesAccepted: { type: Number, default: 0 }
     },
+    communities: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Community'
+      }
+    ],
     savedPosts: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post'
+        ref: 'Information'
       }
     ],
     helpfulPosts: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post'
+        ref: 'Information'
       }
     ],
     joinedAt: {

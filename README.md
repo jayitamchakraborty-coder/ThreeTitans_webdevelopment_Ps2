@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # LocalLoop — Project Audit
+=======
+# Vicinus — Project Audit
+>>>>>>> ee27a55 (feat: complete Vicinus backend integration and unified frontend SPA)
 > Technical co-founder analysis after full Stitch frontend inspection  
 > Date: 2026-10-02 | Hackathon budget: **6 hours**
 
@@ -23,6 +27,7 @@
 
 | Screen Folder | Route / Purpose | Status |
 |---|---|---|
+<<<<<<< HEAD
 | `home_localloop_2` | **Home Feed** — hero search, category filter strip, recommended carousel, main post feed (sort/filter), sidebar trending | ✅ UI complete, 100% mock data |
 | `share_information_localloop_clean_spacious` | **Create Post** — AI-parse textarea (Gemini mock), form (title, category, location, date, time, validity, link, image), live card preview | ✅ UI complete, fake AI simulation |
 | `discover_localloop_amazon_style_browsing` | **Discover** — Amazon-style search results with sidebar category+locality filters, grid of post cards, sort bar | ✅ UI complete, mock data |
@@ -31,6 +36,16 @@
 | `civic_indigo` | **Design token system v1** (DESIGN.md only) | 📄 Design spec only |
 | `civic_indigo_glass` | **Design token system v2** (DESIGN.md only) | 📄 Design spec only |
 | `localloop_logo` | Logo asset (screen.png) | 🖼 Asset only |
+=======
+| `home_Vicinus_2` | **Home Feed** — hero search, category filter strip, recommended carousel, main post feed (sort/filter), sidebar trending | ✅ UI complete, 100% mock data |
+| `share_information_Vicinus_clean_spacious` | **Create Post** — AI-parse textarea (Gemini mock), form (title, category, location, date, time, validity, link, image), live card preview | ✅ UI complete, fake AI simulation |
+| `discover_Vicinus_amazon_style_browsing` | **Discover** — Amazon-style search results with sidebar category+locality filters, grid of post cards, sort bar | ✅ UI complete, mock data |
+| `moderation_Vicinus_clean_queue` | **Moderation Queue** — tabbed queue (pending/reports/updates/under-review/resolved/expired), Verify/Resolve/Edit/Remove actions per card | ✅ UI complete, mock data |
+| `my_activity_Vicinus_2` | **My Activity** — user profile card with stats, tabbed (My Posts / Helpful Marked / Updates Suggested / Reported / Saved), filter chips | ✅ UI complete, mock data |
+| `civic_indigo` | **Design token system v1** (DESIGN.md only) | 📄 Design spec only |
+| `civic_indigo_glass` | **Design token system v2** (DESIGN.md only) | 📄 Design spec only |
+| `Vicinus_logo` | Logo asset (screen.png) | 🖼 Asset only |
+>>>>>>> ee27a55 (feat: complete Vicinus backend integration and unified frontend SPA)
 
 #### What Is Missing / Incomplete
 - ❌ **No real API calls** — zero `fetch`/`axios` calls anywhere. All data is hardcoded HTML.

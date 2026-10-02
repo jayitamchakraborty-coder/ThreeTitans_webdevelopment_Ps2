@@ -5,28 +5,18 @@ const {
   verifyPost,
   resolvePost,
   removePost,
-  reviewSuggestedUpdate
+  editPost
 } = require('../controllers/moderation.controller');
-const { protect, optionalAuth } = require('../middleware/auth');
+const { protect } = require('../middleware/auth');
 const requireRole = require('../middleware/requireRole');
 
-// Demo-friendly moderation middleware: allows moderator/admin token OR demo bypass flag for seamless hackathon judging
-const moderationAccess = async (req, res, next) => {
-  // If demo query/header is present during presentation, let through as moderator
-  if (req.query.demo === 'mod' || req.headers['x-demo-role'] === 'moderator') {
-    return next();
-  }
-
-  // Otherwise enforce standard JWT authentication
-  return protect(req, res, () => {
-    return requireRole('moderator', 'admin')(req, res, next);
-  });
-};
+// All endpoints require MODERATOR or ADMIN role
+const moderationAccess = [protect, requireRole('MODERATOR', 'ADMIN')];
 
 router.get('/queue', moderationAccess, getModerationQueue);
-router.patch('/verify/:id', moderationAccess, verifyPost);
-router.patch('/resolve/:id', moderationAccess, resolvePost);
-router.delete('/remove/:id', moderationAccess, removePost);
-router.patch('/suggested-update/:postId/:updateId', moderationAccess, reviewSuggestedUpdate);
+router.post('/:id/verify', moderationAccess, verifyPost);
+router.post('/:id/resolve', moderationAccess, resolvePost);
+router.delete('/:id', moderationAccess, removePost);
+router.put('/:id', moderationAccess, editPost);
 
 module.exports = router;

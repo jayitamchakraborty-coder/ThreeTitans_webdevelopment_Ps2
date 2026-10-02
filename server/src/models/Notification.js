@@ -13,9 +13,9 @@ const NotificationSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
-    postId: {
+    informationId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Post',
+      ref: 'Information',
       default: null
     },
     type: {
