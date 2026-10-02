@@ -1,0 +1,1109 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="web_standard" name="shell-type">
+<title>LocalLoop — Search &amp; Discover Local Opportunities</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary": "#0284c7",
+            "surface-bright": "#ffffff",
+            "on-secondary-fixed": "#25005a",
+            "primary-fixed": "#e3dfff",
+            "secondary-fixed-dim": "#d2bbff",
+            "on-tertiary-fixed": "#082f49",
+            "on-tertiary-fixed-variant": "#0369a1",
+            "on-secondary-container": "#3730a3",
+            "on-surface-variant": "#4b5563",
+            "outline-variant": "#e5e7eb",
+            "on-tertiary-container": "#075985",
+            "surface-variant": "#f3f4f6",
+            "error-container": "#fee2e2",
+            "secondary": "#4f46e5",
+            "tertiary-fixed": "#e0f2fe",
+            "outline": "#9ca3af",
+            "tertiary-fixed-dim": "#bae6fd",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed-variant": "#4338ca",
+            "surface-dim": "#f3f4f6",
+            "on-surface": "#111827",
+            "surface-container-low": "#f9fafb",
+            "on-secondary": "#ffffff",
+            "surface-tint": "#2563eb",
+            "primary": "#2563eb",
+            "surface-container-highest": "#e5e7eb",
+            "surface-container-high": "#f3f4f6",
+            "primary-container": "#2563eb",
+            "inverse-surface": "#1f2937",
+            "secondary-fixed": "#e0e7ff",
+            "on-primary-container": "#ffffff",
+            "surface-container": "#ffffff",
+            "on-error": "#ffffff",
+            "on-primary-fixed-variant": "#1d4ed8",
+            "on-background": "#111827",
+            "inverse-primary": "#93c5fd",
+            "error": "#dc2626",
+            "surface": "#f8fafc",
+            "inverse-on-surface": "#f9fafb",
+            "secondary-container": "#e0e7ff",
+            "on-error-container": "#991b1b",
+            "on-primary": "#ffffff",
+            "background": "#f8fafc",
+            "on-primary-fixed": "#1e3a8a",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#e0f2fe",
+            "primary-fixed-dim": "#bfdbfe"
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface text-on-surface font-sans antialiased min-h-screen selection:bg-primary/20 selection:text-primary dark:bg-slate-900 dark:text-slate-100">
+<!-- Header Navigation -->
+<header class="sticky top-0 inset-x-0 z-50 bg-white/95 dark:bg-slate-900/95 border-b border-outline-variant dark:border-slate-800 backdrop-blur-md transition-colors">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+<!-- Brand / Location -->
+<div class="flex items-center gap-4 shrink-0">
+<a class="flex items-center gap-2.5 group" data-path="home" href="#">
+<img alt="LocalLoop Logo" class="h-9 w-auto object-contain rounded-md" src="https://lh3.googleusercontent.com/aida/AEtjO1XRT-t3kVVUFIvbCyioQFZFt9fQU5TjYFh1crggJ3qBuKkt3LDfzP5l88Q3-csIufAYeXuyV2ZioHfPKfkP5wE6zYqq-3tPQmaoV6hqRDlLBTuakf7HXDvebGQymzz-rrw611J4Be3JdLoD9Pt_L2Z_iCseA3Qye274e3qQoFYCEHkEs3wAGYkXDhAuF6RMwo9A5g8FNiLlFIENSAAjitVqYgY8VxOFNvPXgS79ChKRAD0_JXguMXByMJQ">
+<div class="flex flex-col">
+<span class="font-bold text-lg leading-tight tracking-tight text-slate-900 dark:text-white group-hover:text-primary transition-colors">LocalLoop</span>
+<span class="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400 font-medium">Local search &amp; updates</span>
+</div>
+</a>
+<!-- Location Selector -->
+<div class="relative group hidden md:block">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">location_on</span>
+<span class="">Kurla / DBIT</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
+</button>
+<div class="absolute left-0 mt-1 w-52 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+<div class="px-3 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Select Location</div>
+<a class="flex items-center justify-between px-3 py-1.5 text-xs text-primary font-semibold bg-blue-50/70 dark:bg-blue-900/30" href="#">Kurla / DBIT <span class="">✓</span></a>
+<a class="block px-3 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700" href="#">Bandra West</a>
+<a class="block px-3 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700" href="#">Andheri East</a>
+<a class="block px-3 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700" href="#">Powai Central</a>
+</div>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden lg:flex items-center gap-1 font-medium text-sm">
+<a class="px-3 py-1.5 rounded-md text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" data-path="home" href="#">Home</a>
+<a aria-current="page" class="px-3 py-1.5 rounded-md bg-blue-50 dark:bg-blue-900/40 text-primary dark:text-blue-400 font-semibold" data-path="discover" href="#">Discover</a>
+
+<a class="px-3 py-1.5 rounded-md text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" data-path="my-activity" href="#">My Activity</a>
+</nav>
+<!-- Header Actions -->
+<div class="flex items-center gap-2">
+<!-- Dark/Light Mode Toggle -->
+<button aria-label="Toggle Theme" class="w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-colors" onclick="document.documentElement.classList.toggle('dark')" type="button">
+<span class="material-symbols-outlined text-[20px] dark:hidden">dark_mode</span>
+<span class="material-symbols-outlined text-[20px] hidden dark:inline text-amber-400">light_mode</span>
+</button>
+<!-- Post New Item CTA -->
+<a class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-primary hover:bg-blue-700 text-white font-semibold text-xs transition-colors shadow-sm" data-path="create-post" href="#">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="">Post Notice</span>
+</a>
+<!-- User Avatar -->
+<div class="relative group">
+<button aria-label="User Profile" class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/60 text-primary dark:text-blue-300 font-semibold text-xs flex items-center justify-center focus:outline-none ring-2 ring-transparent focus:ring-primary/40">
+          AM
+        </button>
+</div>
+</div>
+</div>
+</header>
+<main class="w-full pb-20">
+<!-- Toast Notification Container -->
+<div class="fixed top-20 right-6 z-50 transform -translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-4 py-3 rounded-xl bg-white dark:bg-slate-800 text-slate-800 dark:text-white shadow-xl border border-slate-200 dark:border-slate-700" id="toast-notification">
+<span class="material-symbols-outlined text-emerald-600 text-[20px]" id="toast-icon">check_circle</span>
+<div class="flex flex-col">
+<span class="font-semibold text-xs" id="toast-title">Notice</span>
+<span class="text-xs text-slate-500 dark:text-slate-400" id="toast-desc">Action updated successfully</span>
+</div>
+</div>
+<!-- Amazon-inspired Hero Search Section -->
+<section class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 pt-6 pb-4">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Primary Search Box with Auto-suggestions Dropdown -->
+<div class="relative max-w-4xl mx-auto">
+<div class="flex items-stretch rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all overflow-hidden">
+<!-- Category Quick Scope (Amazon style) -->
+<div class="relative hidden sm:flex items-center shrink-0 border-r border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
+<select aria-label="Search department" class="h-full bg-transparent text-xs font-semibold text-slate-700 dark:text-slate-200 pl-3 pr-7 py-3 cursor-pointer focus:outline-none border-none">
+<option>All Categories</option>
+<option selected="">Internships</option>
+<option>Scholarships</option>
+<option>Events</option>
+<option>Lost &amp; Found</option>
+<option>Local Issues</option>
+</select>
+<span class="material-symbols-outlined text-[16px] text-slate-400 absolute right-2 pointer-events-none">expand_more</span>
+</div>
+<!-- Main Input Field -->
+<div class="relative flex-1 flex items-center">
+<span class="material-symbols-outlined text-slate-400 text-[20px] ml-3.5">search</span>
+<input autocomplete="off" class="w-full pl-3 pr-10 py-3.5 bg-transparent text-sm text-slate-900 dark:text-white placeholder:text-slate-400 border-none focus:outline-none focus:ring-0 font-medium" id="main-search-input" placeholder="Search internships, workshops, local notices, jobs..." type="text" value="internship">
+<button class="absolute right-3 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors" id="clear-search-btn" title="Clear input">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+<!-- Search Action Button -->
+<button class="px-6 sm:px-8 bg-primary hover:bg-blue-700 text-white font-semibold text-sm flex items-center justify-center gap-1.5 transition-colors shrink-0">
+<span class="">Search</span>
+</button>
+</div>
+<!-- Live Auto-Suggestions Dropdown (Appears on focus/typing) -->
+<div class="hidden absolute top-full left-0 right-0 mt-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl z-50 overflow-hidden divide-y divide-slate-100 dark:divide-slate-700/50" id="search-suggestions">
+<div class="p-2">
+<div class="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Suggested Searches</div>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">search</span>
+<span class=""><strong class="text-primary font-semibold">internship</strong> in Kurla Tech Park</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">search</span>
+<span class=""><strong class="text-primary font-semibold">internship</strong> React / Web Development</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">search</span>
+<span class=""><strong class="text-primary font-semibold">internship</strong> BMC Student Stipend program</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">search</span>
+<span class="">cloud computing workshop with <strong class="text-primary font-semibold">internship</strong> interview</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Clean Category Quick-Pills Navigation -->
+<div class="flex items-center gap-2 overflow-x-auto pt-5 pb-1 scrollbar-none">
+<span class="text-xs font-semibold text-slate-400 uppercase tracking-wider shrink-0 mr-1">Categories:</span>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-slate-300 transition-colors shrink-0">
+          All
+        </button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary text-white shadow-sm shrink-0">
+          Internships
+        </button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-slate-300 transition-colors shrink-0">
+          Scholarships
+        </button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-slate-300 transition-colors shrink-0">
+          Events &amp; Workshops
+        </button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-slate-300 transition-colors shrink-0">
+          Lost &amp; Found
+        </button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-slate-300 transition-colors shrink-0">
+          Emergencies
+        </button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-slate-300 transition-colors shrink-0">
+          Local Issues
+        </button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-slate-300 transition-colors shrink-0">
+          Announcements
+        </button>
+</div>
+</div>
+</section>
+<!-- Compact Filters & Sort Header Bar (Amazon e-commerce style) -->
+<section class="sticky top-16 z-40 bg-white/95 dark:bg-slate-900/95 border-b border-slate-200 dark:border-slate-800 backdrop-blur-md py-2.5">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center justify-between gap-3">
+<!-- Compact Filter Dropdown Triggers -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+<!-- Category Filter Dropdown -->
+<div class="relative group shrink-0">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 transition-colors">
+<span class="text-slate-400">Category:</span>
+<span class="font-semibold text-slate-900 dark:text-white">Internships</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
+</button>
+<div class="absolute left-0 mt-1 w-48 p-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+<a class="flex items-center justify-between px-2.5 py-1.5 text-xs text-primary font-semibold bg-blue-50/70 dark:bg-blue-900/30 rounded" href="#">Internships <span class="">✓</span></a>
+<a class="block px-2.5 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded" href="#">Scholarships</a>
+<a class="block px-2.5 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded" href="#">Events &amp; Workshops</a>
+<a class="block px-2.5 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded" href="#">Lost &amp; Found</a>
+</div>
+</div>
+<!-- Location Filter Dropdown -->
+<div class="relative group shrink-0">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 transition-colors">
+<span class="text-slate-400">Location:</span>
+<span class="font-semibold text-slate-900 dark:text-white">Kurla &amp; Nearby</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
+</button>
+<div class="absolute left-0 mt-1 w-48 p-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+<a class="flex items-center justify-between px-2.5 py-1.5 text-xs text-primary font-semibold bg-blue-50/70 dark:bg-blue-900/30 rounded" href="#">Kurla &amp; Nearby <span class="">✓</span></a>
+<a class="block px-2.5 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded" href="#">Within 2 km</a>
+<a class="block px-2.5 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded" href="#">All Mumbai</a>
+</div>
+</div>
+<!-- Date Filter Dropdown -->
+<div class="relative group shrink-0">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 transition-colors">
+<span class="text-slate-400">Date:</span>
+<span class="font-semibold text-slate-900 dark:text-white">This Week</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
+</button>
+<div class="absolute left-0 mt-1 w-40 p-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+<a class="block px-2.5 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded" href="#">Any time</a>
+<a class="block px-2.5 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded" href="#">Past 24 hours</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 text-xs text-primary font-semibold bg-blue-50/70 dark:bg-blue-900/30 rounded" href="#">This Week <span class="">✓</span></a>
+<a class="block px-2.5 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded" href="#">This Month</a>
+</div>
+</div>
+<!-- Status Filter Dropdown -->
+<div class="relative group shrink-0">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 transition-colors">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-semibold text-slate-900 dark:text-white">Verified</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
+</button>
+<div class="absolute left-0 mt-1 w-48 p-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+<a class="flex items-center justify-between px-2.5 py-1.5 text-xs text-emerald-700 dark:text-emerald-400 font-semibold bg-emerald-50 dark:bg-emerald-950/30 rounded" href="#">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Verified</span>
+<span class="">✓</span>
+</a>
+<a class="block px-2.5 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded" href="#">Community Review</a>
+<a class="block px-2.5 py-1.5 text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded" href="#">Show All</a>
+</div>
+</div>
+<!-- More Filters Trigger -->
+<div class="relative group shrink-0">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-slate-400">tune</span>
+<span class="">More Filters</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
+</button>
+<div class="absolute left-0 mt-1 w-48 p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+<label class="flex items-center gap-2 p-1.5 text-xs text-slate-700 dark:text-slate-300 cursor-pointer">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox">
+<span class="">Active validity only</span>
+</label>
+<label class="flex items-center gap-2 p-1.5 text-xs text-slate-700 dark:text-slate-300 cursor-pointer">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox">
+<span class="">With stipend / grant</span>
+</label>
+<label class="flex items-center gap-2 p-1.5 text-xs text-slate-700 dark:text-slate-300 cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox">
+<span class="">Remote / Hybrid only</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Real-world Sort Dropdown (Amazon style) -->
+<div class="relative group flex items-center gap-2 shrink-0 self-end md:self-auto">
+<span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Sort by:</span>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" id="sort-button" type="button">
+<span id="current-sort-label" class="">Relevance</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
+</button>
+<div class="absolute right-0 top-full mt-1 w-44 p-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 divide-y divide-slate-100 dark:divide-slate-700/50">
+<div class="p-1 space-y-0.5">
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 text-xs text-primary dark:text-blue-400 font-semibold bg-blue-50/70 dark:bg-blue-900/30 rounded" onclick="updateSort('Relevance')">
+<span class="">Relevance</span>
+<span class="text-primary dark:text-blue-400">✓</span>
+</button>
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors" onclick="updateSort('Newest')">
+<span class="">Newest</span>
+</button>
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors" onclick="updateSort('Most Helpful')">
+<span class="">Most Helpful</span>
+</button>
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors" onclick="updateSort('Recently Updated')">
+<span class="">Recently Updated</span>
+</button>
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors" onclick="updateSort('Ending Soon')">
+<span class="">Ending Soon</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Removable Filter Chips Bar -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-1">
+<div class="flex flex-wrap items-center gap-2 text-xs">
+<span class="text-slate-400 font-medium">Active filters:</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-medium" id="chip-internships">
+<span class="">Internships</span>
+<button class="hover:text-blue-900 transition-colors" onclick="removeFilterChip('chip-internships')" title="Remove filter">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-medium" id="chip-kurla">
+<span class="">Kurla &amp; Nearby</span>
+<button class="hover:text-red-600 transition-colors" onclick="removeFilterChip('chip-kurla')" title="Remove filter">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-medium" id="chip-this-week">
+<span class="">This Week</span>
+<button class="hover:text-red-600 transition-colors" onclick="removeFilterChip('chip-this-week')" title="Remove filter">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-medium" id="chip-status-verified">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="">Verified</span>
+<button class="hover:text-red-600 transition-colors" onclick="removeFilterChip('chip-status-verified')" title="Remove filter">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</span>
+<button class="text-xs font-semibold text-primary hover:underline ml-1" onclick="clearAllFilters()">
+        Clear all
+      </button>
+</div>
+</div>
+<!-- Primary Results & Sidebar Layout -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left Results Feed (9 Columns: ~75% Dominance) -->
+<div class="lg:col-span-9 flex flex-col gap-4">
+<!-- Results Count Header -->
+<div class="flex items-center justify-between py-1 border-b border-slate-100 dark:border-slate-800 pb-2">
+<div class="text-sm text-slate-700 dark:text-slate-300 font-medium">
+<span class="font-bold text-slate-900 dark:text-white text-base">124 results</span> for <span class="font-semibold text-primary dark:text-blue-400">“internship”</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-slate-400">
+<span class="">Showing 1-10 of 124</span>
+<span class="">•</span>
+<span class="font-medium text-slate-600 dark:text-slate-300">Page 1 of 8</span>
+</div>
+</div>
+<!-- Result Card 1: Crisp High-Contrast Card -->
+<article class="group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 p-5 shadow-sm hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 transition-all">
+<div class="flex flex-col gap-3">
+<!-- Badges & Meta Top Bar -->
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-300 text-xs font-semibold uppercase tracking-wide">
+<span class="material-symbols-outlined text-[14px]">school</span> Internship
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-semibold border border-emerald-200 dark:border-emerald-800/60"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Verified</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium">
+₹22,000 / month
+</span>
+</div>
+<span class="text-xs text-slate-400">Posted 2 hours ago</span>
+</div>
+<!-- Title & Description -->
+<div>
+<h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary dark:group-hover:text-blue-400 transition-colors cursor-pointer" onclick="openDetailsModal(1)">
+Frontend &amp; React Developer Internship (Winter 2025)
+</h2>
+<p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1.5 leading-relaxed">
+Full-time 3-month stipend internship at tech incubator nearby Kurla Station. Experience with Tailwind, TypeScript, &amp; React required. Direct mentorship from senior engineering architects.
+</p>
+</div>
+<!-- Info Attributes Strip -->
+<div class="flex flex-wrap items-center gap-y-2 gap-x-5 py-2.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-850/60 border border-slate-100 dark:border-slate-700/60 text-xs text-slate-600 dark:text-slate-300 font-medium">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary dark:text-blue-400 text-[16px]">location_on</span>
+<span class="">Kurla Tech Park (1.2 km away)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-slate-400 text-[16px]">calendar_today</span>
+<span class="">Valid until: Nov 15, 2025</span>
+</div>
+<div class="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400"><span class="material-symbols-outlined text-[16px]">check_circle</span><span class="">Verified by DBIT moderators</span></div>
+</div>
+<!-- Card Bottom Bar: Actions & Helpful -->
+<div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-medium text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition-colors" onclick="toggleHelpful(this, 42)">
+<span class="material-symbols-outlined text-[15px] text-primary dark:text-blue-400">thumb_up</span>
+<span class="">Helpful (<span class="count">42</span>)</span>
+</button>
+<button class="px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 flex items-center gap-1 transition-colors" onclick="openSuggestModal('Frontend &amp; React Developer Internship')">
+<span class="material-symbols-outlined text-[15px]">edit</span>
+<span class="">Suggest Edit</span>
+</button>
+<button class="px-2.5 py-1.5 text-xs text-slate-400 hover:text-red-600 transition-colors flex items-center gap-1" onclick="openReportModal('Frontend &amp; React Developer Internship')" title="Report inaccurate listing">
+<span class="material-symbols-outlined text-[15px]">flag</span>
+<span class="hidden sm:inline">Report</span>
+</button>
+</div>
+<button class="px-4 py-1.5 rounded-md bg-primary hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1 shadow-sm transition-colors" onclick="openDetailsModal(1)">
+<span class="">View Details</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Result Card 2: Campus Workshop & Screening -->
+<article class="group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 p-5 shadow-sm hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 transition-all">
+<div class="flex flex-col gap-3">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-300 text-xs font-semibold uppercase tracking-wide">
+<span class="material-symbols-outlined text-[14px]">event</span> Workshop &amp; Screening
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-semibold border border-emerald-200 dark:border-emerald-800/60">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Verified Institution
+</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium">
+10 Openings
+</span>
+</div>
+<span class="text-xs text-slate-400">Posted 4 hours ago</span>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 items-start">
+<div class="flex-1">
+<h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary dark:group-hover:text-blue-400 transition-colors cursor-pointer" onclick="openDetailsModal(2)">
+DBIT Campus Cloud Computing Workshop &amp; Internship Screening
+</h2>
+<p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1.5 leading-relaxed">
+AWS student chapter conducting hands-on workshop followed by interview shortlist for 10 internship positions with AWS partner networks in BKC. Carry college ID and resume.
+</p>
+</div>
+<!-- Media Thumbnail -->
+<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 border border-slate-100 dark:border-slate-700">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A modern student tech workshop seminar hall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXLnKEzLOJoG1DAhL09ItlWYokx06u0lc464f9E1qx84sbnJRJFstEkWVlxkbH9EgM0E_1_UENjwZcT3mPDDO9N-Wy_WxWKbsx_rz3CNrDseLRUJGTmYoyGNY8TxBJ1uzrnJbklzb_567zKV-Qk8Qn1hgk8FL5V4oL9HyQiFtAUqqnRwmHCAVbZI-B8eErAI-QpTrwmEcN2noN0vQm-iAf0GtdMjGg7--VXZRRXJJOO7Z43ir5gvqt">
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-y-2 gap-x-5 py-2.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-850/60 border border-slate-100 dark:border-slate-700/60 text-xs text-slate-600 dark:text-slate-300 font-medium">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary dark:text-blue-400 text-[16px]">location_on</span>
+<span class="">DBIT Seminar Hall, Kurla (W)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-slate-400 text-[16px]">schedule</span>
+<span class="">Saturday 10:00 AM IST</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-slate-400 text-[16px]">group</span>
+<span class="">86 Registered</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-medium text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition-colors" onclick="toggleHelpful(this, 31)">
+<span class="material-symbols-outlined text-[15px] text-primary dark:text-blue-400">thumb_up</span>
+<span class="">Helpful (<span class="count">31</span>)</span>
+</button>
+<button class="px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 flex items-center gap-1 transition-colors" onclick="openSuggestModal('DBIT Cloud Computing Workshop')">
+<span class="material-symbols-outlined text-[15px]">edit</span>
+<span class="">Suggest Edit</span>
+</button>
+<button class="px-2.5 py-1.5 text-xs text-slate-400 hover:text-red-600 transition-colors flex items-center gap-1" onclick="openReportModal('DBIT Cloud Computing Workshop')">
+<span class="material-symbols-outlined text-[15px]">flag</span>
+<span class="hidden sm:inline">Report</span>
+</button>
+</div>
+<button class="px-4 py-1.5 rounded-md bg-primary hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1 shadow-sm transition-colors" onclick="openDetailsModal(2)">
+<span class="">View Details</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Result Card 3: Needs Verification Program -->
+<article class="group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 p-5 shadow-sm hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 transition-all">
+<div class="flex flex-col gap-3">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-300 text-xs font-semibold uppercase tracking-wide">
+<span class="material-symbols-outlined text-[14px]">school</span> Internship
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 text-xs font-semibold border border-amber-200/80 dark:border-amber-900/40">
+<span class="material-symbols-outlined text-[14px]">help</span> Needs Verification (3/5)
+</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium">
+₹12,000 Gov Stipend
+</span>
+</div>
+<span class="text-xs text-slate-400">Posted 6 hours ago</span>
+</div>
+<div>
+<h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary dark:group-hover:text-blue-400 transition-colors cursor-pointer" onclick="openDetailsModal(3)">
+Municipal IT Trainee Stipend Program for Undergraduate Engineers
+</h2>
+<p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1.5 leading-relaxed">
+Notice circular spotted on BMC ward office noticeboard. Seeking student confirmation on eligible engineering departments and online vs offline document submission dates.
+</p>
+</div>
+<!-- Verification Progress Callout -->
+<div class="p-3 rounded-lg bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/40 flex items-center justify-between gap-3 text-xs">
+<div class="flex items-center gap-2 text-amber-900 dark:text-amber-200">
+<span class="material-symbols-outlined text-amber-600 text-[18px]">info</span>
+<span class="">3 local residents confirmed this notice board photo. 2 more confirmations needed.</span>
+</div>
+<button class="shrink-0 px-3 py-1 rounded bg-amber-600 hover:bg-amber-700 text-white font-semibold transition-colors" onclick="castVerificationVote()">
+Confirm It
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-y-2 gap-x-5 py-2.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-850/60 border border-slate-100 dark:border-slate-700/60 text-xs text-slate-600 dark:text-slate-300 font-medium">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary dark:text-blue-400 text-[16px]">apartment</span>
+<span class="">L-Ward Office, Kurla</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-slate-400 text-[16px]">update</span>
+<span class="">1 update pending</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-medium text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition-colors" onclick="toggleHelpful(this, 9)">
+<span class="material-symbols-outlined text-[15px] text-primary dark:text-blue-400">thumb_up</span>
+<span class="">Helpful (<span class="count">9</span>)</span>
+</button>
+<button class="px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 flex items-center gap-1 transition-colors" onclick="openSuggestModal('Municipal IT Trainee Stipend Program')">
+<span class="material-symbols-outlined text-[15px]">add_link</span>
+<span class="">Provide Proof / Link</span>
+</button>
+<button class="px-2.5 py-1.5 text-xs text-slate-400 hover:text-red-600 transition-colors flex items-center gap-1" onclick="openReportModal('Municipal IT Trainee Stipend Program')">
+<span class="material-symbols-outlined text-[15px]">flag</span>
+<span class="hidden sm:inline">Report</span>
+</button>
+</div>
+<button class="px-4 py-1.5 rounded-md border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-750 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold flex items-center gap-1 transition-colors" onclick="openDetailsModal(3)">
+<span class="">View Discussion</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Result Card 4: Historical Expired Record -->
+<article class="rounded-xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-850/40 p-5 opacity-70 hover:opacity-100 transition-all">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
+ARCHIVED / EXPIRED
+</span>
+<span class="text-xs text-slate-400">Deadline passed Sept 30</span>
+</div>
+<h2 class="text-sm sm:text-base font-semibold text-slate-600 dark:text-slate-300 line-through cursor-pointer" onclick="openDetailsModal(4)">
+Fall Data Analytics Internship — Kurla FinTech Lab
+</h2>
+<p class="text-xs text-slate-500 leading-relaxed">
+Archived for historical reference and salary benchmarks (Stipend was ₹28,000/mo). 54 local applicants participated.
+</p>
+<div class="pt-1 flex items-center justify-between text-xs">
+<span class="text-slate-400">Status: Hiring completed</span>
+<button class="text-primary dark:text-blue-400 hover:underline font-semibold" onclick="openDetailsModal(4)">
+View Record
+</button>
+</div>
+</div>
+</article>
+<!-- Consumer Pagination Controls -->
+<div class="flex items-center justify-between border-t border-slate-200 dark:border-slate-800 pt-6 mt-2">
+<button class="px-3.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+<span class="">Previous</span>
+</button>
+<div class="flex items-center gap-1 text-xs">
+<button class="w-8 h-8 rounded-lg bg-primary text-white font-bold">1</button>
+<button class="w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-semibold">2</button>
+<button class="w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-semibold">3</button>
+<span class="px-1 text-slate-400">...</span>
+<button class="w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-semibold">8</button>
+</div>
+<button class="px-3.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold flex items-center gap-1 transition-colors">
+<span class="">Next</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Right Column: Narrow Secondary Sidebar (3 Columns) -->
+<aside class="lg:col-span-3 flex flex-col gap-4 sticky top-20">
+<!-- Related Searches Box (Amazon style) -->
+<div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 p-3.5 shadow-sm">
+<div class="flex items-center gap-1.5 mb-2.5 text-slate-900 dark:text-white font-bold text-xs uppercase tracking-wider">
+<span class="material-symbols-outlined text-primary dark:text-blue-400 text-[16px]">trending_up</span>
+<h3 class="">Related Searches</h3>
+</div>
+<div class="flex flex-col gap-1.5">
+<a class="px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-750 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors flex items-center justify-between" href="#">
+<span class="">Software internships</span>
+<span class="material-symbols-outlined text-[14px] text-slate-400">arrow_outward</span>
+</a>
+<a class="px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-750 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors flex items-center justify-between" href="#">
+<span class="">Engineering scholarships</span>
+<span class="material-symbols-outlined text-[14px] text-slate-400">arrow_outward</span>
+</a>
+<a class="px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-750 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors flex items-center justify-between" href="#">
+<span class="">DBIT placement cell</span>
+<span class="material-symbols-outlined text-[14px] text-slate-400">arrow_outward</span>
+</a>
+<a class="px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-750 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors flex items-center justify-between" href="#">
+<span class="">BMC student stipend</span>
+<span class="material-symbols-outlined text-[14px] text-slate-400">arrow_outward</span>
+</a>
+<a class="px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-750 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors flex items-center justify-between" href="#">
+<span class="">Web development</span>
+<span class="material-symbols-outlined text-[14px] text-slate-400">arrow_outward</span>
+</a>
+</div>
+</div>
+<!-- Compact Recently Viewed -->
+<div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 p-3.5 shadow-sm">
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-1.5 text-slate-900 dark:text-white font-bold text-xs uppercase tracking-wider">
+<span class="material-symbols-outlined text-slate-400 text-[16px]">history</span>
+<h3 class="">Recently Viewed</h3>
+</div>
+<button class="text-[11px] font-semibold text-slate-400 hover:text-slate-600 dark:hover:text-slate-200" onclick="clearRecentHistory()">Clear</button>
+</div>
+<div class="space-y-2" id="recently-viewed-list">
+<div class="p-2 rounded-lg border border-slate-100 dark:border-slate-750 hover:bg-slate-50 dark:hover:bg-slate-750 cursor-pointer transition-colors" onclick="openDetailsModal(1)">
+<div class="flex items-center gap-1 text-[10px] font-semibold text-primary dark:text-blue-400 mb-0.5">
+<span class="">Internship</span>
+<span class="">•</span>
+<span class="text-emerald-600 dark:text-emerald-400">Verified</span>
+</div>
+<h4 class="text-xs font-semibold text-slate-800 dark:text-slate-200 line-clamp-1">Frontend &amp; React Developer</h4>
+<span class="text-[10px] text-slate-400">Kurla Tech Park • 10m ago</span>
+</div>
+<div class="p-2 rounded-lg border border-slate-100 dark:border-slate-750 hover:bg-slate-50 dark:hover:bg-slate-750 cursor-pointer transition-colors" onclick="openDetailsModal(2)">
+<div class="flex items-center gap-1 text-[10px] font-semibold text-primary dark:text-blue-400 mb-0.5">
+<span class="">Workshop</span>
+<span class="">•</span>
+<span class="text-emerald-600 dark:text-emerald-400">Verified</span>
+</div>
+<h4 class="text-xs font-semibold text-slate-800 dark:text-slate-200 line-clamp-1">DBIT Cloud Computing Workshop</h4>
+<span class="text-[10px] text-slate-400">DBIT Hall • 1h ago</span>
+</div>
+<div class="p-2 rounded-lg border border-slate-100 dark:border-slate-750 hover:bg-slate-50 dark:hover:bg-slate-750 cursor-pointer transition-colors">
+<div class="flex items-center gap-1 text-[10px] font-semibold text-slate-500 mb-0.5">
+<span class="">Road Works</span>
+<span class="">•</span>
+<span class="">Resolved</span>
+</div>
+<h4 class="text-xs font-semibold text-slate-800 dark:text-slate-200 line-clamp-1">LBS Marg Road Maintenance</h4>
+<span class="text-[10px] text-slate-400">Kurla West • Yesterday</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<!-- INTERACTIVE DETAIL MODAL -->
+<div class="fixed inset-0 z-50 invisible opacity-0 transition-all duration-300 flex items-center justify-center p-4" id="detail-modal">
+<div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="closeDetailsModal()"></div>
+<div class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xl p-6 flex flex-col gap-5 z-10">
+<!-- Top Actions -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-300 text-xs font-bold uppercase" id="modal-badge-category">INTERNSHIP</span>
+<span class="px-2.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-bold" id="modal-badge-status">VERIFIED</span>
+</div>
+<button class="p-1 rounded-md text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors" onclick="closeDetailsModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Title & Locality -->
+<div>
+<h2 class="text-xl font-bold text-slate-900 dark:text-white" id="modal-title">Frontend &amp; React Developer Internship (Winter 2025)</h2>
+<div class="flex flex-wrap items-center gap-3 text-xs text-slate-500 mt-2">
+<span class="flex items-center gap-1 text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-[16px]">location_on</span>
+<span id="modal-locality" class="">Kurla Tech Park, LBS Marg (1.2 km from DBIT)</span>
+</span>
+<span class="">•</span>
+<span id="modal-timestamp" class="">Posted 2 hours ago</span>
+</div>
+</div>
+<!-- Overview -->
+<div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-750/50 border border-slate-100 dark:border-slate-700">
+<h3 class="text-xs font-bold uppercase text-slate-400 mb-2">Description</h3>
+<p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed" id="modal-description">
+          Full-time 3-month stipend internship at tech incubator nearby Kurla Station. Experience with Tailwind &amp; React required. Stipend ₹22,000/month with certificate and pre-placement interview (PPI) opportunity.
+        </p>
+</div>
+<!-- Contact / Official Apply -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-3 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Direct Contact</span>
+<div class="text-xs font-semibold text-slate-900 dark:text-white">careers@kurlatechincubator.org</div>
+</div>
+<div class="flex items-center gap-2 w-full sm:w-auto">
+<button class="px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 transition-colors" onclick="copyToClipboard('careers@kurlatechincubator.org')">
+            Copy Email
+          </button>
+<a class="px-4 py-1.5 rounded-md bg-primary hover:bg-blue-700 text-white text-xs font-semibold shadow-sm transition-colors" href="https://example.com" target="_blank">
+            Apply Official ↗
+          </a>
+</div>
+</div>
+<!-- Action Dialog Footer -->
+<div class="flex items-center justify-between border-t border-slate-200 dark:border-slate-700 pt-4">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 flex items-center gap-1" onclick="triggerToast('Marked helpful! Thank you.')">
+<span class="material-symbols-outlined text-[15px] text-primary">thumb_up</span>
+<span class="">Mark Helpful</span>
+</button>
+<button class="px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 flex items-center gap-1" onclick="openSuggestModal('Frontend &amp; React Developer Internship')">
+<span class="material-symbols-outlined text-[15px]">edit</span>
+<span class="">Suggest Edit</span>
+</button>
+</div>
+<button class="px-4 py-1.5 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-200 transition-colors" onclick="closeDetailsModal()">
+          Close
+        </button>
+</div>
+</div>
+</div>
+<!-- SUGGEST UPDATE MODAL -->
+<div class="fixed inset-0 z-50 invisible opacity-0 transition-all duration-200 flex items-center justify-center p-4" id="suggest-modal">
+<div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="closeSuggestModal()"></div>
+<div class="relative w-full max-w-md rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xl p-6 flex flex-col gap-4 z-10">
+<div class="flex items-center justify-between">
+<h3 class="font-bold text-sm text-slate-900 dark:text-white">Suggest Information Edit</h3>
+<button class="text-slate-400 hover:text-slate-700 dark:hover:text-white" onclick="closeSuggestModal()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="space-y-3">
+<div>
+<label class="text-[11px] font-semibold text-slate-400 block mb-1">Target Notice</label>
+<input class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-750 text-slate-600 dark:text-slate-300 text-xs cursor-not-allowed" id="suggest-target-title" readonly="" type="text">
+</div>
+<div>
+<label class="text-[11px] font-semibold text-slate-400 block mb-1">Correction or Details</label>
+<textarea class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-1 focus:ring-primary focus:outline-none" id="suggest-text" placeholder="e.g. Deadline extended or link updated..." rows="3"></textarea>
+</div>
+</div>
+<div class="flex items-center justify-end gap-2 pt-2">
+<button class="px-3.5 py-1.5 rounded-md text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100" onclick="closeSuggestModal()">Cancel</button>
+<button class="px-4 py-1.5 rounded-md bg-primary hover:bg-blue-700 text-white text-xs font-semibold shadow-sm" onclick="submitSuggestUpdate()">Submit Edit</button>
+</div>
+</div>
+</div>
+<!-- REPORT MODAL -->
+<div class="fixed inset-0 z-50 invisible opacity-0 transition-all duration-200 flex items-center justify-center p-4" id="report-modal">
+<div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="closeReportModal()"></div>
+<div class="relative w-full max-w-md rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xl p-6 flex flex-col gap-4 z-10">
+<div class="flex items-center justify-between">
+<h3 class="font-bold text-sm text-slate-900 dark:text-white">Report Listing</h3>
+<button class="text-slate-400 hover:text-slate-700 dark:hover:text-white" onclick="closeReportModal()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="space-y-2 text-xs">
+<label class="flex items-center gap-2 p-2 rounded-lg border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750 cursor-pointer">
+<input checked="" class="text-primary focus:ring-0" name="report_reason" type="radio">
+<span class="">Expired notice or outdated deadline</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded-lg border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750 cursor-pointer">
+<input class="text-primary focus:ring-0" name="report_reason" type="radio">
+<span class="">Spam, fraudulent, or asks for payment</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded-lg border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750 cursor-pointer">
+<input class="text-primary focus:ring-0" name="report_reason" type="radio">
+<span class="">Incorrect location or duplicate</span>
+</label>
+</div>
+<div class="flex items-center justify-end gap-2 pt-2">
+<button class="px-3.5 py-1.5 rounded-md text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100" onclick="closeReportModal()">Cancel</button>
+<button class="px-4 py-1.5 rounded-md bg-red-600 hover:bg-red-700 text-white text-xs font-semibold shadow-sm" onclick="submitReportFlag()">Submit Report</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Clean Consumer Footer -->
+<footer class="w-full bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 py-10 transition-colors">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<!-- Brand column -->
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<img alt="LocalLoop Logo" class="h-7 w-auto object-contain rounded" src="https://lh3.googleusercontent.com/aida/AEtjO1XRT-t3kVVUFIvbCyioQFZFt9fQU5TjYFh1crggJ3qBuKkt3LDfzP5l88Q3-csIufAYeXuyV2ZioHfPKfkP5wE6zYqq-3tPQmaoV6hqRDlLBTuakf7HXDvebGQymzz-rrw611J4Be3JdLoD9Pt_L2Z_iCseA3Qye274e3qQoFYCEHkEs3wAGYkXDhAuF6RMwo9A5g8FNiLlFIENSAAjitVqYgY8VxOFNvPXgS79ChKRAD0_JXguMXByMJQ">
+<span class="font-bold text-base text-slate-900 dark:text-white">LocalLoop</span>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed">
+          Your neighborhood bulletin for verified notices, internships, scholarships, and local updates.
+        </p>
+</div>
+<!-- Quick Browse -->
+<div>
+<h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-3">Browse Categories</h4>
+<ul class="space-y-2 text-xs">
+<li class=""><a class="hover:text-primary transition-colors" href="#">Student Internships</a></li>
+<li class=""><a class="hover:text-primary transition-colors" href="#">Scholarships &amp; Grants</a></li>
+<li class=""><a class="hover:text-primary transition-colors" href="#">Local Events &amp; Workshops</a></li>
+<li class=""><a class="hover:text-primary transition-colors" href="#">Community Lost &amp; Found</a></li>
+</ul>
+</div>
+<!-- About & Help -->
+<div>
+<h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-3">Support &amp; Community</h4>
+<ul class="space-y-2 text-xs">
+<li class=""><a class="hover:text-primary transition-colors" href="#">Help Center &amp; FAQ</a></li>
+<li class=""><a class="hover:text-primary transition-colors" href="#">Posting Guidelines</a></li>
+<li class=""><a class="hover:text-primary transition-colors" href="#">Report an Issue</a></li>
+<li class=""><a class="hover:text-primary transition-colors" href="#">Volunteer Moderator Council</a></li>
+</ul>
+</div>
+<!-- Locations -->
+<div>
+<h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-3">Serving Areas</h4>
+<p class="text-xs text-slate-500 mb-2">Available across Kurla West, DBIT Campus, Bandra, Powai, and Mumbai Central suburbs.</p>
+<span class="inline-flex items-center gap-1.5 text-xs text-emerald-600 font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span> All systems live
+        </span>
+</div>
+</div>
+<!-- Bottom copyright -->
+<div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+<p class="">© 2025 LocalLoop. All rights reserved.</p>
+<div class="flex items-center gap-4">
+<a class="hover:text-slate-600 dark:hover:text-slate-200" href="#">Privacy Policy</a>
+<a class="hover:text-slate-600 dark:hover:text-slate-200" href="#">Terms of Service</a>
+<a class="hover:text-slate-600 dark:hover:text-slate-200" href="#">Community Rules</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Interactive Scripts -->
+<script>
+  // Toast Utility
+  function triggerToast(message, icon = 'check_circle') {
+    const toast = document.getElementById('toast-notification');
+    const toastDesc = document.getElementById('toast-desc');
+    const toastIcon = document.getElementById('toast-icon');
+
+    if (!toast) return;
+    toastDesc.textContent = message;
+    toastIcon.textContent = icon;
+
+    toast.classList.remove('-translate-y-24', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.add('-translate-y-24', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 2800);
+  }
+
+  // Helpful Counter Upvote
+  function toggleHelpful(button, initialCount) {
+    const countSpan = button.querySelector('.count');
+    if (!countSpan) return;
+    
+    let current = parseInt(countSpan.textContent, 10);
+    const hasVoted = button.getAttribute('data-voted') === 'true';
+
+    if (!hasVoted) {
+      countSpan.textContent = current + 1;
+      button.setAttribute('data-voted', 'true');
+      button.classList.add('bg-blue-50', 'text-primary', 'border-blue-200');
+      triggerToast('Helpful vote recorded!');
+    } else {
+      countSpan.textContent = current - 1;
+      button.removeAttribute('data-voted');
+      button.classList.remove('bg-blue-50', 'text-primary', 'border-blue-200');
+      triggerToast('Vote removed.', 'info');
+    }
+  }
+
+  // Remove Filter Chips
+  function removeFilterChip(chipId) {
+    const chip = document.getElementById(chipId);
+    if (chip) {
+      chip.style.opacity = '0';
+      chip.style.transform = 'scale(0.9)';
+      setTimeout(() => chip.remove(), 150);
+      triggerToast('Filter updated');
+    }
+  }
+
+  function clearAllFilters() {
+    ['chip-internships', 'chip-kurla', 'chip-this-week', 'chip-status-verified'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    });
+    const searchInput = document.getElementById('main-search-input');
+    if (searchInput) searchInput.value = '';
+    triggerToast('All search filters reset.');
+  }
+
+  // Clear Search button
+  const clearBtn = document.getElementById('clear-search-btn');
+  const searchInput = document.getElementById('main-search-input');
+  const suggestionsBox = document.getElementById('search-suggestions');
+
+  if (clearBtn && searchInput) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.focus();
+      triggerToast('Search input cleared');
+    });
+  }
+
+  // Auto-suggestions behavior
+  if (searchInput && suggestionsBox) {
+    searchInput.addEventListener('focus', () => {
+      suggestionsBox.classList.remove('hidden');
+    });
+    searchInput.addEventListener('input', () => {
+      suggestionsBox.classList.remove('hidden');
+    });
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+        suggestionsBox.classList.add('hidden');
+      }
+    });
+  }
+
+  // Details Modal Data
+  const modalData = {
+    1: {
+      title: "Frontend & React Developer Internship (Winter 2025)",
+      badgeCat: "INTERNSHIP",
+      badgeStatus: "VERIFIED",
+      locality: "Kurla Tech Park, LBS Marg (1.2 km from DBIT)",
+      time: "Posted 2 hours ago",
+      desc: "Full-time 3-month stipend internship at tech incubator nearby Kurla Station. Experience with Tailwind & React required. Candidates will collaborate on community-facing apps. Stipend ₹22,000/month with certificate and pre-placement interview (PPI) opportunity."
+    },
+    2: {
+      title: "DBIT Campus Cloud Computing Workshop & Internship Screening",
+      badgeCat: "WORKSHOP",
+      badgeStatus: "VERIFIED INSTITUTION",
+      locality: "DBIT Seminar Hall, Kurla (W)",
+      time: "Posted 4 hours ago",
+      desc: "AWS student chapter conducting hands-on workshop followed by interview shortlist for 10 internship positions with AWS partner networks in BKC. Carry college ID and resume."
+    },
+    3: {
+      title: "Municipal IT Trainee Stipend Program for Undergraduate Engineers",
+      badgeCat: "INTERNSHIP / GRANT",
+      badgeStatus: "NEEDS VERIFICATION",
+      locality: "L-Ward Office, Kurla",
+      time: "Posted 6 hours ago",
+      desc: "Notice circular spotted on BMC ward office noticeboard. Seeking student confirmation on eligible engineering departments. Monthly stipend ₹12,000."
+    },
+    4: {
+      title: "Fall Data Analytics Internship — Kurla FinTech Lab (Expired)",
+      badgeCat: "ARCHIVED",
+      badgeStatus: "EXPIRED",
+      locality: "Kurla West",
+      time: "Archived 3 weeks ago",
+      desc: "Application deadline passed on Sept 30. Preserved for community historical reference and salary benchmarks."
+    }
+  };
+
+  function openDetailsModal(id) {
+    const data = modalData[id] || modalData[1];
+    const modal = document.getElementById('detail-modal');
+    
+    document.getElementById('modal-title').textContent = data.title;
+    document.getElementById('modal-badge-category').textContent = data.badgeCat;
+    document.getElementById('modal-badge-status').textContent = data.badgeStatus;
+    document.getElementById('modal-locality').textContent = data.locality;
+    document.getElementById('modal-timestamp').textContent = data.time;
+    document.getElementById('modal-description').textContent = data.desc;
+
+    modal.classList.remove('invisible', 'opacity-0');
+    modal.classList.add('visible', 'opacity-100');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDetailsModal() {
+    const modal = document.getElementById('detail-modal');
+    modal.classList.add('opacity-0');
+    setTimeout(() => {
+      modal.classList.add('invisible');
+      modal.classList.remove('visible');
+      document.body.style.overflow = '';
+    }, 180);
+  }
+
+  function openSuggestModal(title) {
+    const modal = document.getElementById('suggest-modal');
+    document.getElementById('suggest-target-title').value = title;
+    modal.classList.remove('invisible', 'opacity-0');
+    modal.classList.add('visible', 'opacity-100');
+  }
+
+  function closeSuggestModal() {
+    const modal = document.getElementById('suggest-modal');
+    modal.classList.add('opacity-0');
+    setTimeout(() => {
+      modal.classList.add('invisible');
+      modal.classList.remove('visible');
+    }, 180);
+  }
+
+  function submitSuggestUpdate() {
+    closeSuggestModal();
+    triggerToast('Edit submitted for community review!');
+  }
+
+  function openReportModal(title) {
+    const modal = document.getElementById('report-modal');
+    modal.classList.remove('invisible', 'opacity-0');
+    modal.classList.add('visible', 'opacity-100');
+  }
+
+  function closeReportModal() {
+    const modal = document.getElementById('report-modal');
+    modal.classList.add('opacity-0');
+    setTimeout(() => {
+      modal.classList.add('invisible');
+      modal.classList.remove('visible');
+    }, 180);
+  }
+
+  function submitReportFlag() {
+    closeReportModal();
+    triggerToast('Listing reported to moderators.');
+  }
+
+  function castVerificationVote() {
+    triggerToast('Thanks! Confirmation vote counted.');
+  }
+
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      triggerToast('Copied to clipboard: ' + text);
+    });
+  }
+
+  function clearRecentHistory() {
+    const list = document.getElementById('recently-viewed-list');
+    if (list) {
+      list.innerHTML = '<p class="text-xs text-slate-400 p-2 text-center">No recent items</p>';
+      triggerToast('Cleared search history');
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeDetailsModal();
+      closeSuggestModal();
+      closeReportModal();
+      if (suggestionsBox) suggestionsBox.classList.add('hidden');
+    }
+  });
+</script>
+
+
+<script src="../nav.js"></script>
+</body></html>

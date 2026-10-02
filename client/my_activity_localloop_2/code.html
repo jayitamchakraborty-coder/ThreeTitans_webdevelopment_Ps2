@@ -1,0 +1,688 @@
+<!DOCTYPE html><html lang="en" class="transition-colors" data-stitch-anim-opacity="true" style="opacity: 0;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="web_standard" name="shell-type">
+<title>My Activity - LocalLoop</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary": "#692400",
+            "surface-bright": "#faf8ff",
+            "on-secondary-fixed": "#25005a",
+            "primary-fixed": "#e3dfff",
+            "secondary-fixed-dim": "#d2bbff",
+            "on-tertiary-fixed": "#360f00",
+            "on-tertiary-fixed-variant": "#7d2d00",
+            "on-secondary-container": "#fffbff",
+            "on-surface-variant": "#464554",
+            "outline-variant": "#c7c4d7",
+            "on-tertiary-container": "#ffb393",
+            "surface-variant": "#dae2fd",
+            "error-container": "#ffdad6",
+            "secondary": "#712ae2",
+            "tertiary-fixed": "#ffdbcd",
+            "outline": "#777586",
+            "tertiary-fixed-dim": "#ffb597",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed-variant": "#5a00c6",
+            "surface-dim": "#d2d9f4",
+            "on-surface": "#131b2e",
+            "surface-container-low": "#f2f3ff",
+            "on-secondary": "#ffffff",
+            "surface-tint": "#5148d7",
+            "primary": "#2a14b4",
+            "surface-container-highest": "#dae2fd",
+            "surface-container-high": "#e2e7ff",
+            "primary-container": "#4338ca",
+            "inverse-surface": "#283044",
+            "secondary-fixed": "#eaddff",
+            "on-primary-container": "#c1beff",
+            "surface-container": "#eaedff",
+            "on-error": "#ffffff",
+            "on-primary-fixed-variant": "#372abf",
+            "on-background": "#131b2e",
+            "inverse-primary": "#c3c0ff",
+            "error": "#ba1a1a",
+            "surface": "#faf8ff",
+            "inverse-on-surface": "#eef0ff",
+            "secondary-container": "#8a4cfc",
+            "on-error-container": "#93000a",
+            "on-primary": "#ffffff",
+            "background": "#faf8ff",
+            "on-primary-fixed": "#100069",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#8f3400",
+            "primary-fixed-dim": "#c3c0ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "gutter-mobile": "1rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "display": ["Inter"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "label-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "headline-lg": ["Inter"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-body-md text-body-md min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+<div class="h-16 max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between gap-4">
+<div class="flex items-center gap-4 shrink-0">
+<a class="flex items-center gap-2 group" data-path="home" href="#">
+<img alt="LocalLoop Logo" class="h-9 w-9 object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XRT-t3kVVUFIvbCyioQFZFt9fQU5TjYFh1crggJ3qBuKkt3LDfzP5l88Q3-csIufAYeXuyV2ZioHfPKfkP5wE6zYqq-3tPQmaoV6hqRDlLBTuakf7HXDvebGQymzz-rrw611J4Be3JdLoD9Pt_L2Z_iCseA3Qye274e3qQoFYCEHkEs3wAGYkXDhAuF6RMwo9A5g8FNiLlFIENSAAjitVqYgY8VxOFNvPXgS79ChKRAD0_JXguMXByMJQ">
+<div class="flex flex-col">
+<span class="font-bold text-lg tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">LocalLoop</span>
+<span class="hidden lg:block text-xs text-slate-500 font-medium">Your community bulletin</span>
+</div>
+</a>
+<div class="relative group hidden sm:block">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px] text-indigo-600">location_on</span>
+<span class="">DBIT / Kurla</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400 group-hover:rotate-180 transition-transform">arrow_drop_down</span>
+</button>
+</div>
+</div>
+<div class="hidden xl:flex flex-1 max-w-md mx-4">
+<div class="relative w-full flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-slate-400 pointer-events-none text-[18px]">search</span>
+<input class="w-full pl-9 pr-10 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-slate-800 placeholder:text-slate-400 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all" placeholder="Search my notices, saved items, history..." type="text">
+<kbd class="absolute right-2 px-1.5 py-0.5 rounded bg-slate-200 text-slate-500 text-[10px] font-mono">⌘K</kbd>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-1">
+<a class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" data-path="home" href="#">Home</a>
+<a class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" data-path="discover" href="#">Discover</a>
+
+<a aria-current="page" class="px-3 py-2 text-sm font-semibold rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-100" data-path="my-activity" href="#">My Activity</a>
+</nav>
+<div class="flex items-center gap-2">
+<button id="theme-toggle-btn" aria-label="Toggle Dark Mode" class="w-9 h-9 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors" type="button" onclick="(function(){ const isDark = document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); const icon = document.getElementById('theme-toggle-icon'); if(icon) icon.textContent = isDark ? 'light_mode' : 'dark_mode'; })()"><span id="theme-toggle-icon" class="material-symbols-outlined text-[20px]">dark_mode</span></button><button aria-label="Notifications" class="relative w-9 h-9 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-indigo-600"></span>
+</button>
+<a class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium shadow-sm transition-all" data-path="create-post" href="#">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="">Share Information</span>
+</a>
+<div class="relative group">
+<button aria-label="User Profile" class="flex items-center gap-2 rounded-full p-0.5 focus:outline-none ring-2 ring-transparent group-hover:ring-slate-200 transition-all" type="button">
+<img class="w-8 h-8 rounded-full object-cover border border-slate-200" data-alt="Portrait photo of Rahul Sharma" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtOA-L98U2d-bKDGzW9te0drmOF5QZknBYxqPwe46YunmbFRonCmWNWn1MJSKpuRW9rbinynLQ3NsXnbOOomZHuuuNG5E7oDIsgAcMiM9FV6HBxo7NnbRWF0VuNu0M1jsx5NlCb1Gwsu_Nn4UyNYuDF1tVTDMHKwsWkcP50_Qp2bz_Xz55mnWOr0oK92MqZsj44qk2K15TpdC21KEJgRJEyhqCfTjWTxP9mN1Lk_V04NvqFkTCHJ7I">
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="w-full pt-16 bg-slate-50 min-h-[calc(100vh-64px)] pb-20 md:pb-12">
+<div class="max-w-7xl mx-auto px-4 lg:px-8 pt-8 space-y-6">
+<!-- USER ACCOUNT HEADER & SIMPLE STATS -->
+<section class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<!-- Profile Identity -->
+<div class="flex items-center gap-5">
+<div class="relative shrink-0">
+<img alt="Rahul Sharma" class="w-20 h-20 rounded-full object-cover ring-4 ring-slate-100 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtOA-L98U2d-bKDGzW9te0drmOF5QZknBYxqPwe46YunmbFRonCmWNWn1MJSKpuRW9rbinynLQ3NsXnbOOomZHuuuNG5E7oDIsgAcMiM9FV6HBxo7NnbRWF0VuNu0M1jsx5NlCb1Gwsu_Nn4UyNYuDF1tVTDMHKwsWkcP50_Qp2bz_Xz55mnWOr0oK92MqZsj44qk2K15TpdC21KEJgRJEyhqCfTjWTxP9mN1Lk_V04NvqFkTCHJ7I">
+<span class="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white" title="Verified Account">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h1 class="text-2xl font-bold text-slate-900">Rahul Sharma</h1>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  Verified Member
+                </span>
+</div>
+<p class="text-sm text-slate-500 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-slate-400">location_on</span>
+<span class="">DBIT / Kurla West</span>
+<span class="text-slate-300">•</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">calendar_today</span>
+<span class="">Joined August 2024</span>
+</p>
+</div>
+</div>
+<!-- 3 Clean, Friendly Personal Stats -->
+<div class="grid grid-cols-3 gap-3 sm:gap-6 pt-4 md:pt-0 border-t md:border-t-0 border-slate-100">
+<div class="bg-slate-50 rounded-xl p-3 sm:px-4 sm:py-3 border border-slate-200/60 text-center md:text-left">
+<span class="text-2xl font-bold text-slate-900 block leading-tight">7</span>
+<span class="text-xs text-slate-500 font-medium">Posts Shared</span>
+</div>
+<div class="bg-slate-50 rounded-xl p-3 sm:px-4 sm:py-3 border border-slate-200/60 text-center md:text-left">
+<span class="text-2xl font-bold text-indigo-600 block leading-tight">142</span>
+<span class="text-xs text-slate-500 font-medium">Helpful votes</span>
+</div>
+<div class="bg-slate-50 rounded-xl p-3 sm:px-4 sm:py-3 border border-slate-200/60 text-center md:text-left">
+<span class="text-2xl font-bold text-emerald-600 block leading-tight">3</span>
+<span class="text-xs text-slate-500 font-medium">Updates accepted</span>
+</div>
+</div>
+</div>
+</section>
+<!-- NAVIGATION TABS -->
+<section class="border-b border-slate-200">
+<div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+<button class="tab-btn px-4 py-2.5 rounded-lg bg-indigo-600 text-white font-medium text-sm flex items-center gap-2 shrink-0 shadow-sm transition-all" data-target="my-posts" type="button">
+<span class="material-symbols-outlined text-[18px]">post_add</span>
+<span class="">My Posts</span>
+<span class="ml-1 px-1.5 py-0.5 rounded-full bg-white/20 text-white text-xs font-semibold">7</span>
+</button>
+<button class="tab-btn px-4 py-2.5 rounded-lg bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-medium text-sm flex items-center gap-2 shrink-0 transition-all" data-target="helpful-marked" type="button">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+<span class="">Helpful Marked</span>
+<span class="ml-1 px-1.5 py-0.5 rounded-full bg-slate-200 text-slate-700 text-xs font-semibold">24</span>
+</button>
+<button class="tab-btn px-4 py-2.5 rounded-lg bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-medium text-sm flex items-center gap-2 shrink-0 transition-all" data-target="updates-suggested" type="button">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+<span class="">Updates Suggested</span>
+<span class="ml-1 px-1.5 py-0.5 rounded-full bg-slate-200 text-slate-700 text-xs font-semibold">4</span>
+</button>
+<button class="tab-btn px-4 py-2.5 rounded-lg bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-medium text-sm flex items-center gap-2 shrink-0 transition-all" data-target="reported-items" type="button">
+<span class="material-symbols-outlined text-[18px]">flag</span>
+<span class="">Reported Items</span>
+<span class="ml-1 px-1.5 py-0.5 rounded-full bg-slate-200 text-slate-700 text-xs font-semibold">1</span>
+</button>
+<button class="tab-btn px-4 py-2.5 rounded-lg bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-medium text-sm flex items-center gap-2 shrink-0 transition-all" data-target="saved-items" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+<span class="">Saved &amp; Bookmarked</span>
+<span class="ml-1 px-1.5 py-0.5 rounded-full bg-slate-200 text-slate-700 text-xs font-semibold">12</span>
+</button>
+</div>
+</section>
+<!-- TWO COLUMN WORKSPACE: POSTS FEED + ACTIVITY HISTORY -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Main Activity List (8 Cols) -->
+<div class="lg:col-span-8 space-y-4">
+<!-- Filter Chips Bar -->
+<div class="flex items-center justify-between flex-wrap gap-2 bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm">
+<div class="flex items-center gap-1.5 flex-wrap" id="status-filters">
+<button class="filter-pill active px-3 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-medium flex items-center gap-1.5 transition-all" data-filter="all" type="button">
+<span class="">All</span>
+<span class="px-1.5 py-0.2 rounded-full bg-slate-700 text-slate-200 text-[11px]">7</span>
+</button>
+<button class="filter-pill px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-all" data-filter="verified" type="button">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="">Verified</span>
+<span class="text-slate-500">5</span>
+</button>
+<button class="filter-pill px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-all" data-filter="needs-verification" type="button">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span class="">Needs Verification</span>
+<span class="text-slate-500">1</span>
+</button>
+<button class="filter-pill px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-all" data-filter="under-review" type="button">
+<span class="w-2 h-2 rounded-full bg-purple-500"></span>
+<span class="">Under Review</span>
+<span class="text-slate-400">0</span>
+</button>
+<button class="filter-pill px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-all" data-filter="resolved" type="button">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span>
+<span class="">Resolved</span>
+<span class="text-slate-500">1</span>
+</button>
+<button class="filter-pill px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-all" data-filter="expired" type="button">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span>
+<span class="">Expired</span>
+<span class="text-slate-500">2</span>
+</button>
+</div>
+<div class="hidden sm:flex items-center gap-1 text-slate-400 text-xs font-medium pr-2">
+<span class="material-symbols-outlined text-[16px]">sort</span>
+<span class="">Recent first</span>
+</div>
+</div>
+<!-- Cards Stack -->
+<div class="space-y-4" id="posts-container">
+<!-- CARD 1: Internship Opportunity (Verified) -->
+<article class="post-card rounded-xl bg-white p-5 sm:p-6 border border-slate-200/90 shadow-sm hover:border-slate-300 hover:shadow transition-all" data-status="verified">
+<div class="flex items-start justify-between gap-4">
+<div class="space-y-1.5 flex-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-indigo-50 text-indigo-700 font-semibold text-xs border border-indigo-100">
+                      INTERNSHIP
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-100">
+                      🟢 Verified
+                    </span>
+<span class="text-xs text-slate-400">• Posted Yesterday</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900 hover:text-indigo-600 transition-colors cursor-pointer">
+                    Web Development Internship Opportunity
+                  </h3>
+<p class="text-sm text-slate-600 leading-relaxed line-clamp-2">
+                    Front-end engineering internship for DBIT students specializing in React and Tailwind CSS. Stipend provided with hybrid work flexibility at Kurla Premier Tech Park.
+                  </p>
+</div>
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden shrink-0 hidden sm:block border border-slate-200">
+<img alt="Collaborative workspace" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfl3vBWU07IpmprLorR5VP6PmoPLvanYLh-2iZh8tfHkgHXFMJbAJ__6jD_z42XfzappIuuJ8nla9JY9Wq1zwxaqWv_-T5yh6zce4fIrwt_daBmDvIyCwkmbXAeDaUWTdh6xRseIkjK1vbAs_bIR5LNBWjISaawSCiLHGJmwDaRHP2NiMajLO5tR6fqQROUG-T2b9ILwmNPk0mACtVXJPEnMu_CPFsnnE9OHsqdN5BTfPdfqiHlQkq">
+</div>
+</div>
+<!-- Metadata & Impact strip -->
+<div class="my-3.5 py-2 px-3 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-between flex-wrap gap-2 text-xs text-slate-600">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1 font-semibold text-indigo-600">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span>
+                    24 people found this helpful
+                  </span>
+<span class="text-slate-400 hidden sm:inline">•</span>
+<span class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[16px]">event_available</span>
+                    Valid until Oct 5
+                  </span>
+</div>
+<span class="text-slate-400">Expires in 6 days</span>
+</div>
+<!-- Action buttons -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Opening editor...')" type="button">
+<span class="material-symbols-outlined text-[15px]">edit</span>
+                    Edit
+                  </button>
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Viewing post details...')" type="button">
+<span class="material-symbols-outlined text-[15px]">open_in_new</span>
+                    View Post
+                  </button>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Post marked as resolved!')" type="button">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                  Mark Resolved
+                </button>
+</div>
+</article>
+<!-- CARD 2: Local Civic Issue (Resolved) -->
+<article class="post-card rounded-xl bg-white p-5 sm:p-6 border border-slate-200/90 shadow-sm hover:border-slate-300 hover:shadow transition-all" data-status="resolved">
+<div class="flex items-start justify-between gap-4">
+<div class="space-y-1.5 flex-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-amber-50 text-amber-700 font-semibold text-xs border border-amber-100">
+                      LOCAL ISSUE
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 text-xs font-medium border border-blue-100">
+                      🔵 Resolved
+                    </span>
+<span class="text-xs text-slate-400">• Posted 3 days ago</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900 hover:text-indigo-600 transition-colors cursor-pointer">
+                    Water Pipeline Leakage near LBS Marg Crossing
+                  </h3>
+<p class="text-sm text-slate-600 leading-relaxed">
+                    Fresh water supply line ruptured during storm drain dredging work. BMC engineering crew dispatched and repaired the main connection.
+                  </p>
+</div>
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden shrink-0 hidden sm:block border border-slate-200">
+<img alt="Municipal repair crew" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQWGKqoM2ndYq4L8qeMrhQbc3n6rlEyuFNvy12sCdgIw1kZTAmCpnO8XoTniygpm4L9YhzO0KwNXzidNi-S1IKODmxXw6o-gWYz2mBacXODLxmy-sjlHxF0jtKvKdv4RAvbogjdl8LZQ_K0_qnDpnfp9pu3bQw1-dIlJmmMp-jzF9tEd0EpKVxHm2vC3lDD4WnpJ-_7JRXnBypwOD0jw47GE3erOqM3Xib0ufyAolKBPNrew1AgbVh">
+</div>
+</div>
+<div class="my-3.5 py-2 px-3 rounded-lg bg-blue-50/50 border border-blue-100 flex items-center justify-between flex-wrap gap-2 text-xs">
+<span class="text-blue-800 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                  Resolved 1 day ago • BMC maintenance confirmed pipeline restored
+                </span>
+<span class="text-slate-500 font-semibold">38 residents marked helpful</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Viewing post details...')" type="button">
+<span class="material-symbols-outlined text-[15px]">open_in_new</span>
+                    View Post
+                  </button>
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Opening completion record...')" type="button">
+<span class="material-symbols-outlined text-[15px]">history</span>
+                    Update History
+                  </button>
+</div>
+<span class="text-xs text-emerald-600 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">done_all</span> Completed
+                </span>
+</div>
+</article>
+<!-- CARD 3: Lost & Found (Verified) -->
+<article class="post-card rounded-xl bg-white p-5 sm:p-6 border border-slate-200/90 shadow-sm hover:border-slate-300 hover:shadow transition-all" data-status="verified">
+<div class="flex items-start justify-between gap-4">
+<div class="space-y-1.5 flex-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-purple-50 text-purple-700 font-semibold text-xs border border-purple-100">
+                      LOST &amp; FOUND
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-100">
+                      🟢 Verified
+                    </span>
+<span class="text-xs text-slate-400">• Posted 4 days ago</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900 hover:text-indigo-600 transition-colors cursor-pointer">
+                    Calculator &amp; Engineering Graphics Kit found in Lab 2
+                  </h3>
+<p class="text-sm text-slate-600 leading-relaxed">
+                    Found on desk row 3 after the afternoon session. Casio scientific calculator and drafting instrument box safely deposited at Mechanical Department Office.
+                  </p>
+</div>
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden shrink-0 hidden sm:block border border-slate-200">
+<img alt="Drafting kit" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyesHv3pQCLQxT2L_ydX_S3K-ykc-b1-DPN3S8vEeOQQ5IjoYruAhZoELcjHElrcsWCgf1Bt28RH2vR0L4E66wZ6PBdNpO60FuEMVWwL-E97UHCHEgAjq7Vq18tLCd2_bun6yD3LicFnR5b5gmz1CG5YkPkKL-SXUNRbewrQEv-v_FwVoH65Ug7qjygCS8AFm3x1hWi7YymvxOu2JA4gd4VXY5MYDbih860x4zdiG3E4yRdXcsPKEn">
+</div>
+</div>
+<div class="my-3.5 py-2 px-3 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-between text-xs text-slate-600">
+<span class="flex items-center gap-1 font-semibold text-indigo-600">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span>
+                  14 people found this helpful
+                </span>
+<span class="text-slate-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">location_on</span>
+                  Deposited at Mech Dept Desk
+                </span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Opening editor...')" type="button">
+<span class="material-symbols-outlined text-[15px]">edit</span>
+                    Edit
+                  </button>
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Viewing post details...')" type="button">
+<span class="material-symbols-outlined text-[15px]">open_in_new</span>
+                    View Post
+                  </button>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Item marked as claimed!')" type="button">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                  Mark as Claimed
+                </button>
+</div>
+</article>
+<!-- CARD 4: Needs Verification Notice -->
+<article class="post-card rounded-xl bg-white p-5 sm:p-6 border border-slate-200/90 shadow-sm hover:border-slate-300 hover:shadow transition-all" data-status="needs-verification">
+<div class="flex items-start justify-between gap-4">
+<div class="space-y-1.5 flex-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 font-semibold text-xs border border-slate-200">
+                      TRANSIT UPDATE
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 text-xs font-medium border border-amber-200">
+                      🟡 Needs Verification
+                    </span>
+<span class="text-xs text-slate-400">• Posted 6h ago</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900 hover:text-indigo-600 transition-colors cursor-pointer">
+                    BEST Bus Route 311 Diverted via SG Barve Marg
+                  </h3>
+<p class="text-sm text-slate-600 leading-relaxed">
+                    Due to unexpected pipeline maintenance work near Kurla Depot, commuters reported northbound buses diverting away from DBIT back gate.
+                  </p>
+</div>
+</div>
+<div class="my-3.5 py-2 px-3 rounded-lg bg-amber-50/60 border border-amber-100 flex items-center justify-between text-xs text-amber-900">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-amber-600">info</span>
+                  Awaiting 2 more neighbor confirmations to confirm this route change
+                </span>
+<span class="font-medium text-amber-700">3 of 5 confirmed</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Opening editor...')" type="button">
+<span class="material-symbols-outlined text-[15px]">edit</span>
+                    Edit
+                  </button>
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Viewing post details...')" type="button">
+<span class="material-symbols-outlined text-[15px]">open_in_new</span>
+                    View Post
+                  </button>
+</div>
+<button class="px-3 py-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Post withdrawn')" type="button">
+<span class="material-symbols-outlined text-[15px]">delete_outline</span>
+                  Withdraw Post
+                </button>
+</div>
+</article>
+<!-- CARD 5: Announcement (Expired) -->
+<article class="post-card rounded-xl bg-white p-5 sm:p-6 border border-slate-200/90 shadow-sm opacity-80 hover:opacity-100 transition-all" data-status="expired">
+<div class="flex items-start justify-between gap-4">
+<div class="space-y-1.5 flex-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 font-semibold text-xs border border-slate-200">
+                      CAMPUS EVENT
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-xs font-medium border border-slate-200">
+                      ⚫ Expired
+                    </span>
+<span class="text-xs text-slate-400">• Sept 28, 2024</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-800">
+                    Blood Donation Camp at DBIT Quadrangle
+                  </h3>
+<p class="text-sm text-slate-500 leading-relaxed">
+                    Organized in association with Rotary Kurla and Sion Blood Bank. Camp concluded with 186 successful donor registrations.
+                  </p>
+</div>
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden shrink-0 grayscale opacity-60 hidden sm:block border border-slate-200">
+<img alt="Blood donation camp" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5jPgZ1K0eanNQF_j5MR1fhyEQ2pmwrnSapD-Mpx8fTcNpCRHWAlEweTZqGSnPSS4QQ93Otuk6kvfC5dw38ZwVNbU-kEZQV3IzK4DV7fsKIObVdbYhUboZamZSshziXN58De3OseP6xVIAwOw1gQpWsMqIfWev06AI0Vm58InQiu5L9Qfu7S-8y6YPm48Bxeuk7XqYsWlJS9LSKCCYSXWkQ3zi0PkrQGywD4L8ojbNMdeGec580KBJ">
+</div>
+</div>
+<div class="my-3.5 py-2 px-3 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-between text-xs text-slate-500">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-slate-400">archive</span>
+                  Event completed on Sept 28 • Archived
+                </span>
+<span class="">66 people attended</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Viewing archived post...')" type="button">
+<span class="material-symbols-outlined text-[15px]">open_in_new</span>
+                  View Post
+                </button>
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors" onclick="alert('Notice duplicated into draft.')" type="button">
+<span class="material-symbols-outlined text-[15px]">replay</span>
+                  Repost for Next Term
+                </button>
+</div>
+</article>
+</div>
+</div>
+<!-- Right: Clean Activity History & Notifications (4 Cols) -->
+<aside class="lg:col-span-4 space-y-5">
+<!-- Community Notifications Card -->
+<div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
+<div class="flex items-center justify-between border-b border-slate-100 pb-3">
+<h2 class="font-bold text-slate-900 text-base flex items-center gap-2">
+<span class="material-symbols-outlined text-indigo-600 text-[20px]">notifications</span>
+                Community Notifications
+              </h2>
+<span class="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 text-xs font-medium">Recent</span>
+</div>
+<div class="space-y-3">
+<div class="p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span>
+</div>
+<div class="min-w-0">
+<p class="text-xs text-slate-800 font-medium">
+                    12 people marked your post <span class="text-indigo-600 font-semibold">"Web Development Internship"</span> as helpful.
+                  </p>
+<span class="text-[11px] text-slate-400 mt-0.5 block">2 hours ago</span>
+</div>
+</div>
+<div class="p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+</div>
+<div class="min-w-0">
+<p class="text-xs text-slate-800 font-medium">
+                    Community moderators verified your recent notice.
+                  </p>
+<span class="text-[11px] text-slate-400 mt-0.5 block">5 hours ago</span>
+</div>
+</div>
+<div class="p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">edit_note</span>
+</div>
+<div class="min-w-0">
+<p class="text-xs text-slate-800 font-medium">
+                    Your suggested update on <span class="text-blue-700 font-semibold">Kurla Road Blockage</span> was accepted.
+                  </p>
+<span class="text-[11px] text-slate-400 mt-0.5 block">Yesterday</span>
+</div>
+</div>
+<div class="p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">military_tech</span>
+</div>
+<div class="min-w-0">
+<p class="text-xs text-slate-800 font-medium">
+                    Earned contributor milestone: 100+ helpful votes reached!
+                  </p>
+<span class="text-[11px] text-slate-400 mt-0.5 block">3 days ago</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors text-center" onclick="alert('All past notifications loaded.')" type="button">
+              View All Notifications
+            </button>
+</div>
+<!-- Account & Community Tips Slate -->
+<div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3">
+<h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-indigo-600 text-[18px]">lightbulb</span>
+              Tips for helpful notices
+            </h3>
+<p class="text-xs text-slate-600 leading-relaxed">
+              Include specific landmarks, clear photos, and accurate dates so neighbors can quickly verify and resolve information.
+            </p>
+<div class="pt-1">
+<a class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1" href="#">
+<span class="">Posting guidelines</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- Mobile Bottom Navigation Bar -->
+<div class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-lg">
+<nav class="h-16 flex items-center justify-around px-2">
+<a class="flex flex-col items-center justify-center text-slate-500 text-xs gap-0.5" data-path="home" href="#">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span class="">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 text-xs gap-0.5" data-path="discover" href="#">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+<span class="">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center -mt-4" data-path="create-post" href="#">
+<div class="w-11 h-11 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[22px]">add</span>
+</div>
+<span class="text-[10px] text-slate-600 font-medium mt-0.5">Post</span>
+</a>
+<a aria-current="page" class="flex flex-col items-center justify-center gap-0.5 text-indigo-600 font-bold text-xs" data-path="my-activity" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="">Activity</span>
+</a>
+
+</nav>
+</div>
+<!-- Footer -->
+<footer class="w-full bg-white border-t border-slate-200 text-slate-500">
+<div class="max-w-7xl mx-auto px-4 lg:px-8 py-8">
+<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<img alt="LocalLoop Logo" class="h-6 w-6 object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XRT-t3kVVUFIvbCyioQFZFt9fQU5TjYFh1crggJ3qBuKkt3LDfzP5l88Q3-csIufAYeXuyV2ZioHfPKfkP5wE6zYqq-3tPQmaoV6hqRDlLBTuakf7HXDvebGQymzz-rrw611J4Be3JdLoD9Pt_L2Z_iCseA3Qye274e3qQoFYCEHkEs3wAGYkXDhAuF6RMwo9A5g8FNiLlFIENSAAjitVqYgY8VxOFNvPXgS79ChKRAD0_JXguMXByMJQ">
+<span class="font-bold text-slate-900 text-base">LocalLoop</span>
+<span class="text-xs text-slate-400">© 2025 LocalLoop</span>
+</div>
+<div class="flex items-center gap-6 text-xs text-slate-500">
+<a class="hover:text-slate-900 transition-colors" href="#">Community Guidelines</a>
+<a class="hover:text-slate-900 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-slate-900 transition-colors" href="#">Help &amp; Support</a>
+<a class="hover:text-slate-900 transition-colors" href="#">Terms</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    // Status Filter Chip interactions
+    document.querySelectorAll('#status-filters button').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('#status-filters button').forEach(btn => {
+          btn.classList.remove('bg-slate-900', 'text-white');
+          btn.classList.add('bg-slate-100', 'text-slate-700');
+        });
+        button.classList.remove('bg-slate-100', 'text-slate-700');
+        button.classList.add('bg-slate-900', 'text-white');
+
+        const filter = button.getAttribute('data-filter');
+        const posts = document.querySelectorAll('#posts-container .post-card');
+
+        posts.forEach(post => {
+          const postStatus = post.getAttribute('data-status');
+          if (filter === 'all' || postStatus === filter) {
+            post.style.display = 'block';
+          } else {
+            post.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Tab buttons interactions
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+          b.classList.add('bg-transparent', 'text-slate-600');
+        });
+        btn.classList.remove('bg-transparent', 'text-slate-600');
+        btn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+      });
+    });
+  </script>
+
+
+<script src="../nav.js"></script>
+</body></html>

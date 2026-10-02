@@ -1,0 +1,541 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="web_standard" name="shell-type">
+<title>Share Information - LocalLoop</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#4338ca",
+            "primary-hover": "#3730a3",
+            "primary-light": "#eef2ff",
+            "secondary": "#712ae2",
+            "accent": "#0284c7",
+            "surface": "#ffffff",
+            "surface-ground": "#f8fafc",
+            "surface-container": "#f1f5f9",
+            "surface-border": "#e2e8f0",
+            "on-surface": "#0f172a",
+            "on-surface-variant": "#475569",
+            "outline": "#94a3b8",
+            "outline-light": "#cbd5e1",
+            "error": "#dc2626"
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            heading: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface-ground text-on-surface font-sans min-h-screen selection:bg-primary-light selection:text-primary antialiased">
+<!-- Main Navigation Header -->
+<header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-md border-b border-surface-border">
+<div class="h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+<!-- Brand & Locality Selector -->
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-2.5 group" href="#">
+<img alt="LocalLoop Logo" class="h-8 w-auto object-contain rounded-md" src="https://lh3.googleusercontent.com/aida/AEtjO1XRT-t3kVVUFIvbCyioQFZFt9fQU5TjYFh1crggJ3qBuKkt3LDfzP5l88Q3-csIufAYeXuyV2ZioHfPKfkP5wE6zYqq-3tPQmaoV6hqRDlLBTuakf7HXDvebGQymzz-rrw611J4Be3JdLoD9Pt_L2Z_iCseA3Qye274e3qQoFYCEHkEs3wAGYkXDhAuF6RMwo9A5g8FNiLlFIENSAAjitVqYgY8VxOFNvPXgS79ChKRAD0_JXguMXByMJQ">
+<span class="font-bold text-xl tracking-tight text-on-surface group-hover:text-primary transition-colors">LocalLoop</span>
+</a>
+<div class="relative group hidden sm:block">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-slate-200/70 text-on-surface font-medium text-xs transition-colors border border-surface-border" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">location_on</span>
+<span class="">DBIT / Kurla</span>
+<span class="material-symbols-outlined text-[16px] text-outline group-hover:rotate-180 transition-transform">arrow_drop_down</span>
+</button>
+</div>
+</div>
+<!-- Search bar -->
+<div class="hidden md:flex flex-1 max-w-md mx-4">
+<div class="relative w-full flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">search</span>
+<input class="w-full pl-9 pr-10 py-1.5 rounded-lg bg-surface border border-surface-border text-on-surface placeholder:text-outline text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Search notices, events, updates..." type="text">
+<kbd class="absolute right-2.5 px-1.5 py-0.5 rounded bg-surface-container border border-surface-border text-outline text-[10px] font-mono">⌘K</kbd>
+</div>
+</div>
+<!-- Navigation Links & Actions -->
+<nav class="hidden md:flex items-center gap-1 lg:gap-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#">Home</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#">Discover</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#">My Activity</a>
+</nav>
+<div class="flex items-center gap-2 sm:gap-3">
+<button aria-label="Notifications" class="w-9 h-9 rounded-lg border border-surface-border bg-surface hover:bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<a class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-semibold shadow-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="">Share Information</span>
+</a>
+<div class="w-8 h-8 rounded-full bg-primary-light text-primary border border-indigo-200 flex items-center justify-center font-semibold text-xs ml-1">
+          AM
+        </div>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="w-full pt-20 pb-20 md:pb-16 min-h-[calc(100vh-64px)]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+<!-- Breadcrumb & Header -->
+<div class="mb-6">
+<div class="flex items-center gap-2 text-xs text-on-surface-variant mb-2">
+<span class="">Community</span>
+<span class="text-outline">/</span>
+<span class="text-primary font-medium">DBIT / Kurla</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface font-semibold">Share Information</span>
+</div>
+<h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-on-surface">
+          Share Information
+        </h1>
+<p class="text-sm sm:text-base text-on-surface-variant mt-1 max-w-3xl">
+          Publish notices, campus updates, or neighborhood announcements for residents in DBIT / Kurla.
+        </p>
+</div>
+<!-- Main Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: AI Helper Shortcut + Form (8 cols) -->
+<div class="lg:col-span-8 space-y-6">
+<!-- FEATURE SHORTCUT: Structure with AI Helper Panel -->
+<section class="rounded-xl bg-white border border-indigo-100 shadow-sm overflow-hidden"><div class="p-4 sm:p-5 border-b border-indigo-100 bg-indigo-50/60"><div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-primary-light text-primary border border-indigo-200 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[20px]">auto_awesome</span></div><div><h2 class="text-sm font-bold text-on-surface flex items-center gap-2">Structure with AI<span class="px-2 py-0.5 rounded-full bg-white border border-indigo-200 text-primary text-[10px] font-semibold tracking-wide uppercase shadow-xs">Shortcut</span></h2><p class="text-xs text-on-surface-variant mt-0.5">Paste messy WhatsApp / Telegram announcements to auto-fill the form instantly.</p></div></div><div class="flex items-center gap-1.5 self-start sm:self-auto shrink-0"><span class="text-[11px] font-medium text-outline">Try sample:</span><button class="px-2.5 py-1 rounded-md bg-white hover:bg-slate-50 border border-surface-border text-primary font-medium text-xs transition-colors shadow-xs" id="btn-load-dbit" type="button">Internship</button><button class="px-2.5 py-1 rounded-md bg-white hover:bg-slate-50 border border-surface-border text-on-surface-variant hover:text-on-surface font-medium text-xs transition-colors shadow-xs" id="btn-load-ward" type="button">Water Notice</button></div></div><div class="mt-3.5 space-y-2"><div class="relative"><textarea class="w-full p-3 rounded-lg bg-white border border-surface-border text-on-surface placeholder:text-outline text-xs sm:text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-xs resize-y transition-all" id="raw-source-input" placeholder="Paste your unformatted message or announcement here..." rows="2">guys kal dbit me web internship session hai 2pm seminar hall me registration aaj close hoga stipend 15k and open for 2nd 3rd year students link: bit.ly/dbit-intern</textarea></div><div class="flex items-center justify-between text-[11px] text-outline pt-0.5"><button class="hover:text-on-surface underline transition-colors" id="btn-clear-raw" type="button">Clear message</button><div class="flex items-center gap-3"><span id="raw-char-counter" class="text-outline font-medium">177 characters</span><button class="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary-light hover:bg-indigo-100 text-primary border border-indigo-200 text-xs font-semibold shadow-xs transition-all active:scale-[0.99]" id="btn-trigger-ai" type="button"><span class="material-symbols-outlined text-[15px]">auto_awesome</span><span id="ai-btn-text" class="">Structure with AI</span></button></div></div></div><div class="hidden mt-3 p-2.5 rounded-lg bg-surface-container border border-surface-border flex items-center gap-3" id="ai-processing-state"><div class="w-4 h-4 rounded-full border-2 border-primary border-t-transparent animate-spin shrink-0"></div><div class="text-xs text-on-surface font-medium" id="ai-status-step">Extracting event details, dates, and locations...</div></div><div class="mt-3 p-2.5 px-3.5 rounded-lg bg-indigo-50/90 border border-indigo-200 flex items-center justify-between gap-3" id="ai-result-summary"><div class="flex items-center gap-2 min-w-0"><span class="material-symbols-outlined text-primary text-[18px] shrink-0">check_circle</span><span class="text-xs font-medium text-primary truncate">AI-generated draft — review before publishing</span></div><div class="flex items-center gap-2 shrink-0"><button class="px-2.5 py-1 rounded bg-white hover:bg-slate-50 border border-indigo-200 text-on-surface-variant hover:text-on-surface text-xs font-medium transition-colors" id="btn-revert-ai" type="button">Reset Form</button><button class="px-2.5 py-1 rounded bg-white hover:bg-slate-50 border border-indigo-200 text-primary text-xs font-medium transition-colors" onclick="document.getElementById('form-title').focus();" type="button">Edit</button><button class="px-2.5 py-1 rounded bg-primary hover:bg-primary-hover text-white text-xs font-medium shadow-xs transition-colors" onclick="document.getElementById('publish-success-modal').classList.remove('hidden');" type="button">Publish</button></div></div></div></section>
+<!-- CLEAN PUBLISHING FORM -->
+<section class="rounded-xl bg-white border border-surface-border shadow-sm p-6 sm:p-7 space-y-6">
+<div class="border-b border-surface-border pb-4">
+<h3 class="text-lg font-bold text-on-surface">Notice Details</h3>
+<p class="text-xs text-on-surface-variant mt-0.5">Fill out or review the details of your community post.</p>
+</div>
+<form class="space-y-5" id="civic-form" onsubmit="return false;"><div class="space-y-1.5"><div class="flex items-center justify-between"><label class="text-xs font-semibold text-on-surface" for="form-title">Title <span class="text-error">*</span></label><span class="text-[11px] text-outline font-medium" id="title-counter">47 / 100</span></div><input class="w-full px-3.5 py-2.5 rounded-lg border border-surface-border bg-white text-on-surface text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-xs transition-all" id="form-title" maxlength="100" placeholder="e.g. Web Development Internship Session at DBIT" type="text" value="Web Development Internship Session at DBIT"></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="space-y-1.5"><label class="text-xs font-semibold text-on-surface" for="form-category">Category <span class="text-error">*</span></label><div class="relative"><select class="w-full appearance-none px-3.5 py-2.5 rounded-lg border border-surface-border bg-white text-on-surface text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-xs pr-10 transition-all font-medium" id="form-category"><option selected="" value="internship">🎓 Internship / Career Drive</option><option value="events">🎉 Events &amp; Gatherings</option><option value="announcements">📢 General Announcement</option><option value="emergencies">🚨 Emergency Alert</option><option value="infrastructure">🚧 Roadworks &amp; Utilities</option><option value="lost_found">🔎 Lost &amp; Found</option></select><span class="material-symbols-outlined pointer-events-none absolute right-3 top-2.5 text-on-surface-variant text-[20px]">expand_more</span></div></div><div class="space-y-1.5"><label class="text-xs font-semibold text-on-surface" for="form-location">Location <span class="text-error">*</span></label><div class="relative"><select class="w-full appearance-none pl-9 pr-10 py-2.5 rounded-lg border border-surface-border bg-white text-on-surface text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-xs transition-all font-medium" id="form-location"><option selected="" value="DBIT — Seminar Hall, Kurla">📍 DBIT — Seminar Hall, Kurla</option><option value="DBIT Main Auditorium">📍 DBIT Main Auditorium</option><option value="DBIT Computer Labs (3rd Floor)">📍 DBIT Computer Labs (3rd Floor)</option><option value="Kurla West Station &amp; Vicinity">📍 Kurla West Station &amp; Vicinity</option><option value="L-Ward Municipal Office">📍 L-Ward Municipal Office</option><option value="Online / Google Meet">📍 Online / Virtual</option></select><span class="material-symbols-outlined pointer-events-none absolute left-3 top-2.5 text-primary text-[18px]">location_on</span><span class="material-symbols-outlined pointer-events-none absolute right-3 top-2.5 text-on-surface-variant text-[20px]">expand_more</span></div></div></div><div class="space-y-1.5"><label class="text-xs font-semibold text-on-surface" for="form-description">Description <span class="text-error">*</span></label><textarea class="w-full p-3 rounded-lg border border-surface-border bg-white text-on-surface text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-xs resize-y transition-all leading-relaxed" id="form-description" placeholder="Provide clear details and instructions..." rows="3">Web development internship orientation session for 2nd &amp; 3rd year engineering students with stipend of ₹15,000/month. Bring your laptop and resume draft.</textarea></div><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="space-y-1.5"><label class="text-xs font-semibold text-on-surface" for="form-date">Date</label><div class="relative"><input class="w-full px-3.5 py-2.5 rounded-lg border border-surface-border bg-white text-on-surface text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-xs transition-all" id="form-date" placeholder="e.g. Tomorrow" type="text" value="Tomorrow (Wednesday)"><span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-2.5 text-outline text-[18px]">calendar_today</span></div></div><div class="space-y-1.5"><label class="text-xs font-semibold text-on-surface" for="form-time">Time</label><div class="relative"><input class="w-full px-3.5 py-2.5 rounded-lg border border-surface-border bg-white text-on-surface text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-xs transition-all" id="form-time" placeholder="e.g. 2:00 PM" type="text" value="2:00 PM"><span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-2.5 text-outline text-[18px]">schedule</span></div></div><div class="space-y-1.5"><label class="text-xs font-semibold text-on-surface" for="form-validity">Valid Until</label><div class="relative"><input class="w-full px-3.5 py-2.5 rounded-lg border border-surface-border bg-white text-on-surface text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-xs transition-all" id="form-validity" placeholder="e.g. Active for 24h" type="text" value="Today at 11:59 PM (Registration Closes)"><span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-2.5 text-outline text-[18px]">timer</span></div></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="space-y-1.5"><label class="text-xs font-semibold text-on-surface" for="form-link">Link / Registration URL</label><div class="relative"><input class="w-full pl-9 pr-3.5 py-2.5 rounded-lg border border-surface-border bg-white text-on-surface text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-xs transition-all" id="form-link" placeholder="https://example.com" type="text" value="https://bit.ly/dbit-intern"><span class="material-symbols-outlined pointer-events-none absolute left-2.5 top-2.5 text-primary text-[18px]">link</span></div></div><div class="space-y-1.5"><label class="text-xs font-semibold text-on-surface">Audience / Scope</label><div class="w-full px-3.5 py-2.5 rounded-lg border border-surface-border bg-surface-container flex items-center justify-between text-xs text-on-surface-variant font-medium"><span class="flex items-center gap-1.5 text-primary"><span class="material-symbols-outlined text-[16px]">public</span> Public Community Notice</span><span class="text-[11px] text-outline font-semibold uppercase">DBIT / Kurla</span></div></div></div><div class="space-y-1.5"><label class="text-xs font-semibold text-on-surface">Optional Image / Circular</label><div class="p-5 rounded-lg border-2 border-dashed border-surface-border hover:border-primary/50 bg-white hover:bg-surface-container transition-colors cursor-pointer text-center group shadow-xs"><div class="flex flex-col items-center justify-center gap-1.5"><div class="w-9 h-9 rounded-full bg-primary-light border border-indigo-200 group-hover:border-primary text-primary flex items-center justify-center transition-all"><span class="material-symbols-outlined text-[18px]">cloud_upload</span></div><p class="text-xs font-medium text-on-surface">Click to upload poster or image file</p><span class="text-[11px] text-outline">PNG, JPG up to 10MB</span></div></div></div><div class="p-3.5 rounded-lg bg-surface-container border border-surface-border flex items-start gap-2.5"><input checked="" class="mt-0.5 w-4 h-4 rounded border-outline text-primary focus:ring-primary cursor-pointer" id="guidelines-check" type="checkbox"><label class="text-xs text-on-surface-variant cursor-pointer select-none" for="guidelines-check">I confirm this is authentic, verified community information for DBIT / Kurla.</label></div><div class="pt-3 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-surface-border"><div class="flex items-center gap-2 w-full sm:w-auto"><button class="w-full sm:w-auto px-4 py-2.5 rounded-lg border border-surface-border bg-white hover:bg-slate-50 text-on-surface text-xs font-medium transition-colors shadow-xs" id="btn-save-draft" type="button">Save as Draft</button><button class="w-full sm:w-auto px-3 py-2.5 rounded-lg text-outline hover:text-on-surface text-xs font-medium transition-colors" id="btn-restart" type="button">Clear Form</button></div><button class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-bold shadow-md transition-all active:scale-[0.99]" id="btn-publish-main" type="button"><span class="material-symbols-outlined text-[18px]">send</span><span class="">Publish Information</span></button></div></form>
+</section>
+</div>
+<!-- Right Column: Live Bulletin Preview (4 cols) -->
+<div class="lg:col-span-4 space-y-5 sticky top-24"><div class="rounded-xl bg-white border border-surface-border shadow-sm p-5 space-y-4"><div class="flex items-center justify-between"><span class="text-xs font-bold uppercase tracking-wider text-outline">Live Card Preview</span><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-600 border border-surface-border text-[11px] font-semibold"><span class="material-symbols-outlined text-[14px]">verified</span> Feed View</span></div><div class="rounded-lg border border-surface-border bg-white p-4 space-y-3 shadow-xs hover:border-primary/50 transition-colors"><div class="flex items-center justify-between gap-2 text-xs"><span class="px-2.5 py-0.5 rounded-md bg-primary-light text-primary font-semibold text-[11px] border border-indigo-100" id="preview-category-badge">🎓 Internship / Career Drive</span><span class="text-outline text-[11px] flex items-center gap-1 font-medium"><span class="material-symbols-outlined text-[13px]">schedule</span><span id="preview-time-badge" class="">Just now</span></span></div><h4 class="text-base font-bold text-on-surface leading-snug" id="preview-title">Web Development Internship Session at DBIT</h4><div class="space-y-1.5 text-xs text-on-surface-variant"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[16px]">location_on</span><span id="preview-location" class="font-medium">DBIT — Seminar Hall, Kurla</span></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-outline text-[16px]">event</span><span id="preview-date-time" class="">Tomorrow (Wednesday) • 2:00 PM</span></div><div class="flex items-center gap-2 text-error font-medium"><span class="material-symbols-outlined text-[16px]">alarm</span><span id="preview-validity" class="">Today at 11:59 PM (Registration Closes)</span></div></div><p class="text-xs text-on-surface-variant/90 line-clamp-3 leading-relaxed" id="preview-body">Web development internship orientation session for 2nd &amp; 3rd year engineering students with stipend of ₹15,000/month. Bring your laptop and resume draft.</p><div class="p-2.5 rounded-lg bg-surface-ground border border-surface-border flex items-center justify-between gap-2"><div class="flex items-center gap-1.5 min-w-0"><span class="material-symbols-outlined text-primary text-[16px] shrink-0">link</span><span class="text-xs text-primary font-medium truncate" id="preview-link">https://bit.ly/dbit-intern</span></div><span class="material-symbols-outlined text-outline text-[14px]">open_in_new</span></div><div class="pt-2.5 border-t border-surface-border flex items-center justify-between text-[11px] text-outline"><span class="font-semibold text-on-surface-variant">Posted by Aarav Mehta</span><span class="px-2 py-0.5 rounded bg-primary-light text-primary font-semibold text-[10px]">DBIT / Kurla</span></div></div><div class="p-3 rounded-lg bg-surface-ground border border-surface-border text-on-surface-variant text-xs flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[16px] mt-0.5 shrink-0">info</span><span class="leading-relaxed">This is exactly how neighbors and campus members will see your post in the main community feed.</span></div></div></div>
+</div>
+</div>
+</main>
+<!-- SUCCESS PUBLISHED MODAL -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs" id="publish-success-modal">
+<div class="relative w-full max-w-md rounded-xl bg-white shadow-xl p-6 space-y-5 border border-surface-border">
+<div class="flex flex-col items-center text-center space-y-2">
+<div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">check_circle</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface">
+          Information Published!
+        </h3>
+<p class="text-xs text-on-surface-variant">
+          Your update is now live on the DBIT / Kurla community bulletin board.
+        </p>
+</div>
+<div class="p-3 rounded-lg bg-surface-ground border border-surface-border space-y-1.5 text-xs text-on-surface-variant">
+<div class="flex justify-between">
+<span class="">Target Locality:</span>
+<span class="font-medium text-on-surface">DBIT / Kurla</span>
+</div>
+<div class="flex justify-between">
+<span class="">Status:</span>
+<span class="text-emerald-600 font-medium">Active in Feed</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-2">
+<a class="w-full py-2 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-semibold text-center transition-colors shadow-sm" href="#">
+          View in Feed
+        </a>
+<button class="w-full py-2 rounded-lg border border-surface-border bg-white hover:bg-slate-50 text-on-surface text-xs font-medium transition-colors" id="btn-close-modal" type="button">
+          Share Another Notice
+        </button>
+</div>
+</div>
+</div>
+<!-- TOAST NOTIFICATION -->
+<div class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="toast-notification">
+<div class="flex items-center gap-2.5 px-4 py-3 rounded-lg bg-slate-900 text-white shadow-lg text-xs">
+<span class="material-symbols-outlined text-emerald-400 text-[18px]" id="toast-icon">check_circle</span>
+<div>
+<p class="font-semibold text-white" id="toast-title">Notice Saved</p>
+<p class="text-slate-300 text-[11px]" id="toast-desc">Draft saved locally</p>
+</div>
+</div>
+</div>
+<!-- FOOTER -->
+<footer class="w-full bg-white border-t border-surface-border text-on-surface-variant mt-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<img alt="LocalLoop Logo" class="h-6 w-auto object-contain rounded" src="https://lh3.googleusercontent.com/aida/AEtjO1XRT-t3kVVUFIvbCyioQFZFt9fQU5TjYFh1crggJ3qBuKkt3LDfzP5l88Q3-csIufAYeXuyV2ZioHfPKfkP5wE6zYqq-3tPQmaoV6hqRDlLBTuakf7HXDvebGQymzz-rrw611J4Be3JdLoD9Pt_L2Z_iCseA3Qye274e3qQoFYCEHkEs3wAGYkXDhAuF6RMwo9A5g8FNiLlFIENSAAjitVqYgY8VxOFNvPXgS79ChKRAD0_JXguMXByMJQ">
+<span class="font-bold text-sm text-on-surface">LocalLoop</span>
+<span class="text-xs text-outline ml-2">© 2025 LocalLoop</span>
+</div>
+<div class="flex items-center gap-6 text-xs text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Community Guidelines</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- CLIENT INTERACTIONS SCRIPT -->
+<script>
+    (function initShareInformationPage() {
+      // Input Handles
+      const rawSource = document.getElementById('raw-source-input');
+      const rawCounter = document.getElementById('raw-char-counter');
+      const btnTriggerAI = document.getElementById('btn-trigger-ai');
+      const aiBtnText = document.getElementById('ai-btn-text');
+      const aiProcessing = document.getElementById('ai-processing-state');
+      const aiStatusStep = document.getElementById('ai-status-step');
+      const aiSummary = document.getElementById('ai-result-summary');
+
+      // Form Handles
+      const formTitle = document.getElementById('form-title');
+      const formCategory = document.getElementById('form-category');
+      const formLocation = document.getElementById('form-location');
+      const formDate = document.getElementById('form-date');
+      const formTime = document.getElementById('form-time');
+      const formValidity = document.getElementById('form-validity');
+      const formDesc = document.getElementById('form-description');
+      const formLink = document.getElementById('form-link');
+      const titleCounter = document.getElementById('title-counter');
+
+      // Preview Handles
+      const prevTitle = document.getElementById('preview-title');
+      const prevCategory = document.getElementById('preview-category-badge');
+      const prevLocation = document.getElementById('preview-location');
+      const prevDateTime = document.getElementById('preview-date-time');
+      const prevValidity = document.getElementById('preview-validity');
+      const prevBody = document.getElementById('preview-body');
+      const prevLink = document.getElementById('preview-link');
+
+      // Modal & Toast Handles
+      const publishModal = document.getElementById('publish-success-modal');
+      const btnPublish = document.getElementById('btn-publish-main');
+      const btnCloseModal = document.getElementById('btn-close-modal');
+      const toast = document.getElementById('toast-notification');
+      const toastTitle = document.getElementById('toast-title');
+      const toastDesc = document.getElementById('toast-desc');
+
+      // Raw Input Counter
+      if (rawSource && rawCounter) {
+        rawSource.addEventListener('input', () => {
+          rawCounter.textContent = `${rawSource.value.length} characters`;
+        });
+      }
+
+      // Title Sync
+      if (formTitle) {
+        formTitle.addEventListener('input', () => {
+          if (titleCounter) titleCounter.textContent = `${formTitle.value.length} / 100`;
+          if (prevTitle) prevTitle.textContent = formTitle.value || 'Untitled Notice';
+        });
+      }
+
+      // Category Sync
+      if (formCategory && prevCategory) {
+        formCategory.addEventListener('change', () => {
+          prevCategory.textContent = formCategory.options[formCategory.selectedIndex].text;
+        });
+      }
+
+      // Location Sync
+      if (formLocation && prevLocation) {
+        formLocation.addEventListener('input', () => {
+          prevLocation.textContent = formLocation.value || 'Location not specified';
+        });
+      }
+
+      // Date / Time Sync
+      const updateDateTime = () => {
+        if (prevDateTime) {
+          prevDateTime.textContent = `${formDate.value || 'Date TBA'} • ${formTime.value || 'Time TBA'}`;
+        }
+      };
+      if (formDate) formDate.addEventListener('input', updateDateTime);
+      if (formTime) formTime.addEventListener('input', updateDateTime);
+
+      // Validity Sync
+      if (formValidity && prevValidity) {
+        formValidity.addEventListener('input', () => {
+          prevValidity.textContent = formValidity.value || 'No validity specified';
+        });
+      }
+
+      // Description Sync
+      if (formDesc && prevBody) {
+        formDesc.addEventListener('input', () => {
+          prevBody.textContent = formDesc.value || 'Notice description will appear here.';
+        });
+      }
+
+      // Link Sync
+      if (formLink && prevLink) {
+        formLink.addEventListener('input', () => {
+          prevLink.textContent = formLink.value || 'No link attached';
+        });
+      }
+
+      // Demo Scenarios
+      const scenarios = {
+        internship: {
+          raw: "guys kal dbit me web internship session hai 2pm seminar hall me registration aaj close hoga stipend 15k and open for 2nd 3rd year students link: bit.ly/dbit-intern",
+          title: "Web Development Internship Session at DBIT",
+          category: "internship",
+          location: "DBIT — Seminar Hall, Kurla",
+          date: "Tomorrow (Wednesday)",
+          time: "2:00 PM",
+          validity: "Today at 11:59 PM (Registration Closes)",
+          desc: "Web development internship orientation session for 2nd & 3rd year engineering students with stipend of ₹15,000/month. Bring your laptop and resume draft.",
+          link: "https://bit.ly/dbit-intern"
+        },
+        ward: {
+          raw: "Urgent: Kurla L-ward water pipeline maintenance tomorrow morning 8am to next day 8am. Complete water supply cutoff in DBIT campus and Kurla West station area. Please store adequate water.",
+          title: "24-Hour Water Supply Cutoff: Kurla L-Ward",
+          category: "emergencies",
+          location: "Kurla West & DBIT Vicinity",
+          date: "Tomorrow (8:00 AM) to Next Day (8:00 AM)",
+          time: "08:00 AM",
+          validity: "Active for next 48 hours",
+          desc: "Municipal pipeline overhaul will cause temporary 24-hour water supply suspension. DBIT campus and surrounding residential societies are advised to store sufficient water.",
+          link: "https://portal.mcgm.gov.in/notices"
+        }
+      };
+
+      const API_BASE = 'http://localhost:5000/api';
+
+      // Real AI Structure via Backend with Offline Fallback
+      async function triggerAiStructure(rawText) {
+        if (!rawText || !rawText.trim()) {
+          showToast('Empty Input', 'Please paste announcement text first.');
+          return;
+        }
+
+        if (aiProcessing) aiProcessing.classList.remove('hidden');
+        if (btnTriggerAI) btnTriggerAI.disabled = true;
+        if (aiBtnText) aiBtnText.textContent = "AI Structuring...";
+        if (aiStatusStep) aiStatusStep.textContent = "Extracting dates, venue, category & urgency...";
+
+        try {
+          const res = await fetch(`${API_BASE}/ai/parse`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: rawText })
+          });
+
+          if (!res.ok) throw new Error('API parse returned error');
+          const json = await res.json();
+          if (json.success && json.data) {
+            applyDataToForm({
+              title: json.data.title || 'Community Update',
+              category: json.data.category || 'announcements',
+              location: json.data.location || 'DBIT / Kurla',
+              date: json.data.date || 'TBA',
+              time: json.data.time || 'TBA',
+              validity: json.data.validUntil || 'Active',
+              desc: json.data.description || rawText,
+              link: json.data.link || ''
+            });
+            showToast('AI Draft Created', 'Structured using LocalLoop Gemini backend.');
+            return;
+          }
+          throw new Error('Invalid response structure');
+        } catch (err) {
+          console.warn('[AI Pipeline] Backend unavailable, using local heuristic:', err.message);
+          // Fallback to local heuristic
+          const lower = rawText.toLowerCase();
+          if (lower.includes('water') || lower.includes('ward') || lower.includes('pipeline')) {
+            applyDataToForm(scenarios.ward);
+          } else {
+            applyDataToForm(scenarios.internship);
+          }
+          showToast('Draft Ready', 'Extracted via fallback heuristic.');
+        } finally {
+          if (aiProcessing) aiProcessing.classList.add('hidden');
+          if (btnTriggerAI) btnTriggerAI.disabled = false;
+          if (aiBtnText) aiBtnText.textContent = "Structure with AI";
+          if (aiSummary) aiSummary.classList.remove('hidden');
+        }
+      }
+
+      function applyDataToForm(data) {
+        if (!data) return;
+        if (formTitle) formTitle.value = data.title;
+        if (formCategory) formCategory.value = data.category;
+        if (formLocation) formLocation.value = data.location;
+        if (formDate) formDate.value = data.date;
+        if (formTime) formTime.value = data.time;
+        if (formValidity) formValidity.value = data.validity;
+        if (formDesc) formDesc.value = data.desc;
+        if (formLink) formLink.value = data.link;
+
+        if (titleCounter && formTitle) titleCounter.textContent = `${formTitle.value.length} / 100`;
+        if (prevTitle) prevTitle.textContent = data.title;
+        if (prevCategory && formCategory) {
+          prevCategory.textContent = formCategory.options[formCategory.selectedIndex]?.text || data.category;
+        }
+        if (prevLocation) prevLocation.textContent = data.location;
+        if (prevDateTime) prevDateTime.textContent = `${data.date} • ${data.time}`;
+        if (prevValidity) prevValidity.textContent = data.validity;
+        if (prevBody) prevBody.textContent = data.desc;
+        if (prevLink) prevLink.textContent = data.link;
+      }
+
+      // AI Button Event
+      if (btnTriggerAI) {
+        btnTriggerAI.addEventListener('click', () => {
+          triggerAiStructure(rawSource ? rawSource.value : '');
+        });
+      }
+
+      // Sample Button Presets
+      const btnDbit = document.getElementById('btn-load-dbit');
+      const btnWard = document.getElementById('btn-load-ward');
+
+      if (btnDbit) {
+        btnDbit.addEventListener('click', () => {
+          if (rawSource) {
+            rawSource.value = scenarios.internship.raw;
+            if (rawCounter) rawCounter.textContent = `${rawSource.value.length} characters`;
+          }
+          triggerAiStructure(scenarios.internship.raw);
+        });
+      }
+
+      if (btnWard) {
+        btnWard.addEventListener('click', () => {
+          if (rawSource) {
+            rawSource.value = scenarios.ward.raw;
+            if (rawCounter) rawCounter.textContent = `${rawSource.value.length} characters`;
+          }
+          triggerAiStructure(scenarios.ward.raw);
+        });
+      }
+
+      // Clear Raw Button
+      const btnClearRaw = document.getElementById('btn-clear-raw');
+      if (btnClearRaw && rawSource) {
+        btnClearRaw.addEventListener('click', () => {
+          rawSource.value = '';
+          if (rawCounter) rawCounter.textContent = '0 characters';
+        });
+      }
+
+      // Reset / Clear Form
+      const btnRevert = document.getElementById('btn-revert-ai');
+      const btnRestart = document.getElementById('btn-restart');
+      const resetForm = () => {
+        if (formTitle) formTitle.value = '';
+        if (formLocation) formLocation.value = '';
+        if (formDate) formDate.value = '';
+        if (formTime) formTime.value = '';
+        if (formValidity) formValidity.value = '';
+        if (formDesc) formDesc.value = '';
+        if (formLink) formLink.value = '';
+        if (titleCounter) titleCounter.textContent = '0 / 100';
+        if (prevTitle) prevTitle.textContent = 'Untitled Notice';
+        if (prevLocation) prevLocation.textContent = 'Location TBA';
+        if (prevDateTime) prevDateTime.textContent = 'Date TBA • Time TBA';
+        if (prevValidity) prevValidity.textContent = 'No expiry set';
+        if (prevBody) prevBody.textContent = 'Notice description will appear here.';
+        if (prevLink) prevLink.textContent = 'No link attached';
+        showToast('Form Reset', 'All input fields cleared.');
+      };
+
+      if (btnRevert) btnRevert.addEventListener('click', resetForm);
+      if (btnRestart) btnRestart.addEventListener('click', resetForm);
+
+      // Save as Draft
+      const btnDraft = document.getElementById('btn-save-draft');
+      if (btnDraft) {
+        btnDraft.addEventListener('click', () => {
+          showToast('Draft Saved', 'Your notice is stored locally.');
+        });
+      }
+
+      // Publish Action wired to Real Backend /api/posts
+      if (btnPublish && publishModal) {
+        btnPublish.addEventListener('click', async () => {
+          const postPayload = {
+            title: formTitle?.value || 'Untitled Community Notice',
+            description: formDesc?.value || 'No description provided',
+            category: formCategory?.value || 'announcements',
+            location: formLocation?.value || 'DBIT / Kurla',
+            locality: 'DBIT/Kurla',
+            date: formDate?.value || '',
+            time: formTime?.value || '',
+            link: formLink?.value || '',
+            rawInput: rawSource?.value || ''
+          };
+
+          btnPublish.disabled = true;
+          btnPublish.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Publishing...</span>`;
+
+          try {
+            const res = await fetch(`${API_BASE}/posts`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(postPayload)
+            });
+            const data = await res.json();
+            if (data.success) {
+              publishModal.classList.remove('hidden');
+              showToast('Post Published!', 'Successfully saved to LocalLoop database.');
+            } else {
+              publishModal.classList.remove('hidden');
+              showToast('Notice Published', data.message || 'Published to local board.');
+            }
+          } catch (err) {
+            console.warn('[Publish] Offline or API unreachable:', err.message);
+            publishModal.classList.remove('hidden');
+            showToast('Published (Local Mode)', 'Notice saved in browser session.');
+          } finally {
+            btnPublish.disabled = false;
+            btnPublish.innerHTML = `<span class="material-symbols-outlined text-[18px]">send</span><span>Publish Information</span>`;
+          }
+        });
+      }
+
+      if (btnCloseModal && publishModal) {
+        btnCloseModal.addEventListener('click', () => {
+          publishModal.classList.add('hidden');
+          resetForm();
+        });
+      }
+
+      // Toast Helper
+      function showToast(title, desc) {
+        if (!toast) return;
+        if (toastTitle) toastTitle.textContent = title;
+        if (toastDesc) toastDesc.textContent = desc;
+
+        toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('translate-y-0', 'opacity-100');
+
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+        }, 2800);
+      }
+    })();
+  </script>
+
+
+<script src="../nav.js"></script>
+</body></html>

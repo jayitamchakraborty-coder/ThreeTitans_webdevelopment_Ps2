@@ -1,0 +1,23 @@
+{
+  "name": "localloop-server",
+  "version": "1.0.0",
+  "description": "Backend API for LocalLoop Community Information Hub",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "seed": "node src/seed.js"
+  },
+  "keywords": ["localloop", "community", "hyperlocal", "express", "mongodb"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.3.2"
+  }
+}
